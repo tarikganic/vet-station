@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetStat.Data;
 
@@ -11,9 +12,11 @@ using VetStat.Data;
 namespace VetStat.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231121180815_Role")]
+    partial class Role
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,9 +197,15 @@ namespace VetStat.Migrations
 
             modelBuilder.Entity("VetStat.Models.Customer", b =>
                 {
+                    b.HasOne("VetStat.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("Id");
+
                     b.HasOne("VetStat.Models.Person", "Person")
                         .WithMany()
                         .HasForeignKey("Id");
+
+                    b.Navigation("Employee");
 
                     b.Navigation("Person");
                 });
