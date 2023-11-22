@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetStat.Data;
 
@@ -11,9 +12,11 @@ using VetStat.Data;
 namespace VetStat.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231122112456_EmployeePerson")]
+    partial class EmployeePerson
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,64 @@ namespace VetStat.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("VetStat.Models.Person", b =>
+            modelBuilder.Entity("VetStat.Models.Customer", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("MembershipLoyalty")
+                        .HasColumnType("real");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<DateTime>("ProfileCreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("RoleId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("Customer", (string)null);
+                });
+
+            modelBuilder.Entity("VetStat.Models.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,7 +96,11 @@ namespace VetStat.Migrations
                     b.Property<int?>("CityId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DateOfEmployment")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -48,9 +112,11 @@ namespace VetStat.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("Picture")
@@ -60,13 +126,17 @@ namespace VetStat.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VetstationId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Person", (string)null);
+                    b.ToTable("Employee");
 
                     b.UseTptMappingStrategy();
                 });
@@ -88,32 +158,6 @@ namespace VetStat.Migrations
                     b.ToTable("Role");
                 });
 
-            modelBuilder.Entity("VetStat.Models.Customer", b =>
-                {
-                    b.HasBaseType("VetStat.Models.Person");
-
-                    b.Property<float?>("MembershipLoyalty")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("ProfileCreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.ToTable("Customer", (string)null);
-                });
-
-            modelBuilder.Entity("VetStat.Models.Employee", b =>
-                {
-                    b.HasBaseType("VetStat.Models.Person");
-
-                    b.Property<DateTime>("DateOfEmployment")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("VetstationId")
-                        .HasColumnType("int");
-
-                    b.ToTable("Employee");
-                });
-
             modelBuilder.Entity("VetStat.Models.Barber", b =>
                 {
                     b.HasBaseType("VetStat.Models.Employee");
@@ -132,6 +176,7 @@ namespace VetStat.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Qualifications")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.ToTable("Nurse", (string)null);
@@ -155,7 +200,7 @@ namespace VetStat.Migrations
                     b.ToTable("Vet", (string)null);
                 });
 
-            modelBuilder.Entity("VetStat.Models.Person", b =>
+            modelBuilder.Entity("VetStat.Models.Customer", b =>
                 {
                     b.HasOne("VetStat.Models.Role", "Role")
                         .WithMany()
@@ -164,49 +209,40 @@ namespace VetStat.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("VetStat.Models.Customer", b =>
-                {
-                    b.HasOne("VetStat.Models.Person", null)
-                        .WithOne()
-                        .HasForeignKey("VetStat.Models.Customer", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("VetStat.Models.Employee", b =>
                 {
-                    b.HasOne("VetStat.Models.Person", "Person")
+                    b.HasOne("VetStat.Models.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("Id");
+                        .HasForeignKey("RoleId");
 
-                    b.Navigation("Person");
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("VetStat.Models.Barber", b =>
                 {
-                    b.HasOne("VetStat.Models.Employee", null)
-                        .WithOne()
-                        .HasForeignKey("VetStat.Models.Barber", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("VetStat.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("Id");
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("VetStat.Models.Nurse", b =>
                 {
-                    b.HasOne("VetStat.Models.Employee", null)
-                        .WithOne()
-                        .HasForeignKey("VetStat.Models.Nurse", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("VetStat.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("Id");
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("VetStat.Models.Vet", b =>
                 {
-                    b.HasOne("VetStat.Models.Employee", null)
-                        .WithOne()
-                        .HasForeignKey("VetStat.Models.Vet", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("VetStat.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("Id");
+
+                    b.Navigation("Employee");
                 });
 #pragma warning restore 612, 618
         }

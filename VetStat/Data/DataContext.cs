@@ -1,86 +1,43 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VetStat.Models;
 using System.Collections;
+using System.Reflection.Metadata;
 
 namespace VetStat.Data
 {
-    public class DataContext:DbContext
+    public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options) { 
-        
-
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
 
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            #region one-to-oneRealationships
-            //[Entity]-Person
-            //Customer-Person
-            modelBuilder.Entity<Customer>()     
-            .HasOne(s => s.Person)             
-            .WithMany()                         
-            .HasForeignKey(e => e.Id)           
-            .IsRequired(false);   
-            
-            //Nurse-Person
-            modelBuilder.Entity<Nurse>()
+            modelBuilder.Entity<Vet>().ToTable("Vet");
+            modelBuilder.Entity<Nurse>().ToTable("Nurse");
+            modelBuilder.Entity<Barber>().ToTable("Barber");
+            modelBuilder.Entity<Customer>().ToTable("Customer");
+            modelBuilder.Entity<Person>().ToTable("Person");
+
+            modelBuilder.Entity<Employee>()
             .HasOne(s => s.Person)
             .WithMany()
             .HasForeignKey(e => e.Id)
             .IsRequired(false);
 
-            //Barber-Person
-            modelBuilder.Entity<Barber>()
-            .HasOne(s => s.Person)
-            .WithMany()
-            .HasForeignKey(e => e.Id)
-            .IsRequired(false);
+        }
+        public DbSet<Person> Person => Set<Person>();
+        public DbSet<Customer> Customer => Set<Customer>();
 
-            //Vet-Person
-            modelBuilder.Entity<Vet>()
-            .HasOne(s => s.Person)
-            .WithMany()
-            .HasForeignKey(e => e.Id)
-            .IsRequired(false);
+        public DbSet<Nurse> Nurse => Set<Nurse>();
 
-            //////////////////////////
-            //[Entity]-Employee
-            //Nurse-Employee
-            modelBuilder.Entity<Nurse>()
-            .HasOne(s => s.Employee)
-            .WithMany()
-            .HasForeignKey(e => e.Id)
-            .IsRequired(false);
+        public DbSet<Vet> Vet => Set<Vet>();
 
-            //Barber-Employee
-            modelBuilder.Entity<Barber>()
-            .HasOne(s => s.Employee)
-            .WithMany()
-            .HasForeignKey(e => e.Id)
-            .IsRequired(false);
+        public DbSet<Employee> Employee => Set<Employee>();
 
-            //Vet-Employee
-            modelBuilder.Entity<Vet>()
-            .HasOne(s => s.Employee)
-            .WithMany()
-            .HasForeignKey(e => e.Id)
-            .IsRequired(false);
+        public DbSet<Role> Role => Set<Role>();
 
-            #endregion
-
-            base.OnModelCreating(modelBuilder);
-        } 
-       public DbSet<Person> Person =>  Set<Person>();
-
-       public DbSet<Customer> Customer => Set<Customer>();
-
-       public DbSet<Nurse> Nurse => Set<Nurse>();
-
-       public DbSet<Vet> Vet => Set<Vet>();
-
-       public DbSet<Employee> Employee => Set<Employee>();
-
-       public DbSet<Role> Role => Set<Role>();  
+        public DbSet<Barber> Barber => Set<Barber>();
     }
 }
