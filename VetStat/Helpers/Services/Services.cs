@@ -53,6 +53,28 @@ namespace VetStat.Helpers.Validators
             if (updatedEntity.Picture!=null)
                 entityToUpdate.Picture = updatedEntity.Picture;
       
+            if (entityToUpdate is Vet vet && updatedEntity is Vet updatedVet)
+            {
+                if (!string.IsNullOrEmpty(updatedVet.Speciality))
+                    vet.Speciality = updatedVet.Speciality;
+                if (!string.IsNullOrEmpty(updatedVet.SpecialSkill))
+                    vet.SpecialSkill = updatedVet.SpecialSkill;
+                if (!string.IsNullOrEmpty(updatedVet.Education))
+                    vet.Education = updatedVet.Education;
+            }
+
+            else if (entityToUpdate is Barber barber && updatedEntity is Barber updatedBarber)
+                if (updatedBarber.Certification != null)
+                    barber.Certification = updatedBarber.Certification;
+                
+            if (entityToUpdate is Nurse nurse && updatedEntity is Nurse updatedNurse)
+            {
+                if (!string.IsNullOrEmpty(updatedNurse.Qualifications))
+                    nurse.Qualifications = updatedNurse.Qualifications;
+
+                if (!string.IsNullOrEmpty(updatedNurse.Informations))
+                    nurse.Informations = updatedNurse.Informations;
+            }
         }
 
     
