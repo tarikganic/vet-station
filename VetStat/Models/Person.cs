@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace VetStat.Models
 {
@@ -8,28 +10,37 @@ namespace VetStat.Models
         [Key]
         public int Id { get; set; }
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        [Required]
+        public string? FirstName { get; set; }
 
-        public string Email { get; set; }
+        [Required]
+        public string? LastName { get; set; }
 
-        public string Phone { get; set; }
+        public string? Email { get; set; }
+
+        public string? Phone { get; set; }
 
         [ForeignKey("Role")]
-        public int RoleId { get; set; }
+        [AllowNull]
+        public int? RoleId { get; set; }
 
-        public Role Role {get; set;}
+        [JsonIgnore]
+        [AllowNull]
+        public Role? Role {get; set;}
 
-        public byte[] Picture { get; set; } //Pictures are saved as memory stream
+        [JsonIgnore]
+        [AllowNull]
+        public byte[]? Picture { get; set; } //Pictures are saved as memory stream
 
-        public DateTime BirthDate { get; set; }
+        public DateTime BirthDate { get; set; } = DateTime.Now;
 
-        public string Username { get; set; }
+        public string? Username { get; set; }
 
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         [ForeignKey("City")]
-        public int CityId { get; set; }
+        [AllowNull]
+        public int? CityId { get; set; }
 
         //public City City { get; set; }
 

@@ -1,33 +1,93 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using VetStat.Data;
 
-namespace VetStat.Controllers
+namespace Stat.Controllers
 {
+    //------------------------------------------------
+    // ATTENTION!
+    // THIS CONTROLLER IS MADE FOR EXAPMLE PURPOSES
+    // FOR DEVELOPERS THAT ARE WORKING ON THIS PROJECT
+    //------------------------------------------------
+
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class ExampleController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        private readonly DataContext _db;
+        public ExampleController(DataContext db)
         {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
-        private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
-        {
-            _logger = logger;
+            _db = db;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        //api/[controller]/GetAll
+        [HttpGet]
+        public ActionResult<List<object>> GetAll()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            if (true)
+                return Ok(value: new List<object>() { new { Id = 1, Name = "Example" } });
+            return NoContent();
+        }
+
+        //api/[controller]/Get/:id
+        [HttpGet("{id}")]
+        public ActionResult<object> Get(int id)
+        {
+            var listFromDatabase = new List<object>() { new { Id = 1, Name = "Example1" }, new { Id = 2, Name = "Example2" } }; //_db.[DbSet].ToList();
+            try
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                //This condition is just for example purposes 
+                return Ok(listFromDatabase.Where(x => x.GetType().GetProperty("Id").GetValue(x).Equals(id)).ToList());   //this condition should mostly look like this ->!_db.[DbSet].Where(x => x.Id == id).IsNullOrEmpty()
+            } 
+            catch (Exception ex)
+            {
+                return NoContent();
+            }
+   
+        }
+
+        //api/[controller]/Add
+        [HttpPost]
+        public ActionResult<object> Add([FromBody] object obj)
+        {
+            try
+            {
+                return Ok(obj);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        //api/[controller]/Edit/:id
+        [HttpPut("{id}")]
+        public ActionResult Edit([FromBody] object obj, int id)
+        {
+            if (true) //e.g.
+                return Ok(obj);
+           return BadRequest();
+        }
+
+        //api/[controller]/Delete/:id
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                var objectToDelete = new {Id = 1, Name = "Example"}; //var objectToDelete = _db.[DbSet].SingleOrDefault(x => x.Id == id);
+                if (objectToDelete.Id == id)    //for example purpose
+                    if (objectToDelete != null)
+                    objectToDelete = null;      //    _db.[DbSet].Remove(objectToDelete);
+                                                //    _db.SaveChanges();
+
+                return Ok(objectToDelete);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Could not delete: {ex.Message}");
+            }
         }
     }
 }

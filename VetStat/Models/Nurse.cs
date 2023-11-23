@@ -1,20 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Runtime.ConstrainedExecution;
 
 namespace VetStat.Models
 {
-    public class Nurse
+    public class Nurse : Employee
     {
-        [Key, ForeignKey("Person")]
-        public int? Id { get; set; }
-
-        public string Qualifications { get; set; }
+        public string? Qualifications { get; set; }
 
         public string? Informations { get; set; }
-
-        public virtual Person? Person { get; set; }
-
-        public virtual Employee? Employee { get; set; }
 
     }
 }
