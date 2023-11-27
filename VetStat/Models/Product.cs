@@ -12,7 +12,7 @@ namespace VetStat.Models
         public string? Description { get; set; }
         [ForeignKey("SubCategory")]
         public int SubCategoryId { get; set; }
-        public SubCategory Subcategory;
+        public SubCategory SubCategory;
         public string? SideEffects { get; set; }
         public byte[]? Image { get; set; } //picture
 

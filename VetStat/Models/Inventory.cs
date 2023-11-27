@@ -6,8 +6,9 @@ namespace VetStat.Models
 {
     public class Inventory
     {
-        [Key]
+        [Key, ForeignKey("VetStation")]
         public int Id { get; set; }
+        public VetStation VetStation { get; set; }
         [ForeignKey("Product")]
         public int ProductId { get; set; }
         public Product Product { get; set; }
