@@ -26,6 +26,12 @@ namespace VetStat.Data
             .HasForeignKey(e => e.Id)
             .IsRequired(false);
 
+            modelBuilder.Entity<Inventory>()
+            .HasOne(s => s.VetStation)
+            .WithMany()
+            .HasForeignKey(e => e.Id)
+            .IsRequired(false);
+
         }
         public DbSet<Person> Person => Set<Person>();
         public DbSet<Customer> Customer => Set<Customer>();
@@ -39,5 +45,14 @@ namespace VetStat.Data
         public DbSet<Role> Role => Set<Role>();
 
         public DbSet<Barber> Barber => Set<Barber>();
-    }
+
+        public DbSet<Admin> Admin => Set<Admin>();
+        public DbSet<City> City => Set<City>();
+        public DbSet<VetStation> VetStation => Set<VetStation>();
+        public DbSet<FAQ> FAQ => Set<FAQ>();
+        public DbSet<Inventory> Inventory => Set<Inventory>();
+        public DbSet<Product> Product => Set<Product>();
+        public DbSet<SubCategory> SubCategory => Set<SubCategory>();   
+        public DbSet<Category> Category => Set<Category>();
+     }
 }
