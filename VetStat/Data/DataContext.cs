@@ -19,6 +19,7 @@ namespace VetStat.Data
             modelBuilder.Entity<Barber>().ToTable("Barber");
             modelBuilder.Entity<Customer>().ToTable("Customer");
             modelBuilder.Entity<Person>().ToTable("Person");
+            modelBuilder.Entity<MainVet>().ToTable("MainVet");   
 
             modelBuilder.Entity<Employee>()
             .HasOne(s => s.Person)
@@ -43,9 +44,7 @@ namespace VetStat.Data
         public DbSet<Employee> Employee => Set<Employee>();
 
         public DbSet<Role> Role => Set<Role>();
-
         public DbSet<Barber> Barber => Set<Barber>();
-
         public DbSet<Admin> Admin => Set<Admin>();
         public DbSet<City> City => Set<City>();
         public DbSet<VetStation> VetStation => Set<VetStation>();
@@ -54,5 +53,12 @@ namespace VetStat.Data
         public DbSet<Product> Product => Set<Product>();
         public DbSet<SubCategory> SubCategory => Set<SubCategory>();   
         public DbSet<Category> Category => Set<Category>();
+
+        public DbSet<Animal> Animal => Set<Animal>();
+        public DbSet<Appointment> Appointment => Set<Appointment>();
+        public DbSet<Availability> Availability => Set<Availability>();
+        public DbSet<MainVet> MainVet => Set<MainVet>();
+        public DbSet<Species> Species => Set<Species>();
+        public DbSet<TimeSlot> TimeSlot => Set<TimeSlot>();
      }
 }
