@@ -12,8 +12,8 @@ using VetStat.Data;
 namespace VetStat.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20231127145412_EmployeeVetStation")]
-    partial class EmployeeVetStation
+    [Migration("20231127191812_Update2")]
+    partial class Update2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,110 @@ namespace VetStat.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Admin");
+                });
+
+            modelBuilder.Entity("VetStat.Models.Animal", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("Id"));
+
+                    b.Property<int>("AnimalSpeciesId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("MedicalFile")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("Picture")
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalSpeciesId");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("Animal");
+                });
+
+            modelBuilder.Entity("VetStat.Models.Appointment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AnimalId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TimeSlotId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VetStationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AnimalId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.HasIndex("TimeSlotId");
+
+                    b.HasIndex("VetStationId");
+
+                    b.ToTable("Appointment");
+                });
+
+            modelBuilder.Entity("VetStat.Models.Availability", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AppointmentDuration")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("AvailableFrom")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("AvailableTo")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EmployeeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Availability");
                 });
 
             modelBuilder.Entity("VetStat.Models.Category", b =>
@@ -248,6 +352,34 @@ namespace VetStat.Migrations
                     b.ToTable("Role");
                 });
 
+            modelBuilder.Entity("VetStat.Models.Species", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Behavior")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Diet")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PredatorsAndThreats")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ScientificName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SpeciesName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Species");
+                });
+
             modelBuilder.Entity("VetStat.Models.SubCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -263,11 +395,45 @@ namespace VetStat.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("ProductId");
+
                     b.ToTable("SubCategory");
+                });
+
+            modelBuilder.Entity("VetStat.Models.TimeSlot", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AvailabilityId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("SlotDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SlotEmployeeId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AvailabilityId");
+
+                    b.HasIndex("SlotEmployeeId");
+
+                    b.ToTable("TimeSlot");
                 });
 
             modelBuilder.Entity("VetStat.Models.VetStation", b =>
@@ -364,6 +530,86 @@ namespace VetStat.Migrations
                     b.ToTable("Vet", (string)null);
                 });
 
+            modelBuilder.Entity("VetStat.Models.MainVet", b =>
+                {
+                    b.HasBaseType("VetStat.Models.Vet");
+
+                    b.ToTable("MainVet", (string)null);
+                });
+
+            modelBuilder.Entity("VetStat.Models.Animal", b =>
+                {
+                    b.HasOne("VetStat.Models.Species", "Species")
+                        .WithMany()
+                        .HasForeignKey("AnimalSpeciesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VetStat.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Species");
+                });
+
+            modelBuilder.Entity("VetStat.Models.Appointment", b =>
+                {
+                    b.HasOne("VetStat.Models.Animal", "Animal")
+                        .WithMany()
+                        .HasForeignKey("AnimalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VetStat.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VetStat.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VetStat.Models.TimeSlot", "TimeSlot")
+                        .WithMany()
+                        .HasForeignKey("TimeSlotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VetStat.Models.VetStation", "VetStation")
+                        .WithMany()
+                        .HasForeignKey("VetStationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Animal");
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("TimeSlot");
+
+                    b.Navigation("VetStation");
+                });
+
+            modelBuilder.Entity("VetStat.Models.Availability", b =>
+                {
+                    b.HasOne("VetStat.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("VetStat.Models.FAQ", b =>
                 {
                     b.HasOne("VetStat.Models.VetStation", "VetStation")
@@ -409,7 +655,30 @@ namespace VetStat.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("VetStat.Models.Product", null)
+                        .WithMany("SubCategories")
+                        .HasForeignKey("ProductId");
+
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("VetStat.Models.TimeSlot", b =>
+                {
+                    b.HasOne("VetStat.Models.Availability", "Availability")
+                        .WithMany()
+                        .HasForeignKey("AvailabilityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VetStat.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("SlotEmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Availability");
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("VetStat.Models.VetStation", b =>
@@ -474,6 +743,20 @@ namespace VetStat.Migrations
                         .HasForeignKey("VetStat.Models.Vet", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("VetStat.Models.MainVet", b =>
+                {
+                    b.HasOne("VetStat.Models.Vet", null)
+                        .WithOne()
+                        .HasForeignKey("VetStat.Models.MainVet", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VetStat.Models.Product", b =>
+                {
+                    b.Navigation("SubCategories");
                 });
 #pragma warning restore 612, 618
         }
