@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetStat.Data;
 
@@ -11,9 +12,11 @@ using VetStat.Data;
 namespace VetStat.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231127145412_EmployeeVetStation")]
+    partial class EmployeeVetStation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,7 +43,7 @@ namespace VetStat.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Admin", (string)null);
+                    b.ToTable("Admin");
                 });
 
             modelBuilder.Entity("VetStat.Models.Category", b =>
@@ -57,7 +60,7 @@ namespace VetStat.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category", (string)null);
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("VetStat.Models.City", b =>
@@ -82,7 +85,7 @@ namespace VetStat.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("City", (string)null);
+                    b.ToTable("City");
                 });
 
             modelBuilder.Entity("VetStat.Models.FAQ", b =>
@@ -108,7 +111,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("VetStationId");
 
-                    b.ToTable("FAQ", (string)null);
+                    b.ToTable("FAQ");
                 });
 
             modelBuilder.Entity("VetStat.Models.Inventory", b =>
@@ -143,7 +146,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Inventory", (string)null);
+                    b.ToTable("Inventory");
                 });
 
             modelBuilder.Entity("VetStat.Models.Person", b =>
@@ -225,7 +228,7 @@ namespace VetStat.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product", (string)null);
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("VetStat.Models.Role", b =>
@@ -242,7 +245,7 @@ namespace VetStat.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role", (string)null);
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("VetStat.Models.SubCategory", b =>
@@ -260,16 +263,11 @@ namespace VetStat.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("SubCategory", (string)null);
+                    b.ToTable("SubCategory");
                 });
 
             modelBuilder.Entity("VetStat.Models.VetStation", b =>
@@ -294,7 +292,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("VetStation", (string)null);
+                    b.ToTable("VetStation");
                 });
 
             modelBuilder.Entity("VetStat.Models.Customer", b =>
@@ -322,7 +320,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("VetStationId");
 
-                    b.ToTable("Employee", (string)null);
+                    b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("VetStat.Models.Barber", b =>
@@ -411,10 +409,6 @@ namespace VetStat.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("VetStat.Models.Product", null)
-                        .WithMany("StudentCourses")
-                        .HasForeignKey("ProductId");
-
                     b.Navigation("Category");
                 });
 
@@ -480,11 +474,6 @@ namespace VetStat.Migrations
                         .HasForeignKey("VetStat.Models.Vet", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("VetStat.Models.Product", b =>
-                {
-                    b.Navigation("StudentCourses");
                 });
 #pragma warning restore 612, 618
         }

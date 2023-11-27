@@ -12,8 +12,8 @@ namespace VetStat.Models
         public int Id { get; set; }
 
         [ForeignKey("VetStation")]
-        public int VetstationId { get; set; }
-        public VetStation VetStationId { get; set; }
+        public int VetStationId { get; set; }
+        public VetStation VetStation { get; set; }
 
         [Required]
         public DateTime DateOfEmployment { get; set; }

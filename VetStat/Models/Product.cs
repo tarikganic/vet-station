@@ -10,9 +10,11 @@ namespace VetStat.Models
         public string ProductName { get; set; }
         public string Manufacturer { get; set; }
         public string? Description { get; set; }
+
         [ForeignKey("SubCategory")]
         public int SubCategoryId { get; set; }
-        public SubCategory SubCategory;
+
+        public ICollection<SubCategory> SubCategories { get; set; } = new List<SubCategory>(); //it has a same function as -> public SubCategory SubCategory
         public string? SideEffects { get; set; }
         public byte[]? Image { get; set; } //picture
 
