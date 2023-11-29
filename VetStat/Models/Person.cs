@@ -20,16 +20,15 @@ namespace VetStat.Models
 
         public string? Phone { get; set; }
 
-        [ForeignKey("Role")]
-        [AllowNull]
+        [ForeignKey("Role"), AllowNull]
         public int? RoleId { get; set; }
 
-        [JsonIgnore]
-        [AllowNull]
+        [JsonIgnore, AllowNull]
+    
         public Role? Role {get; set;}
 
-        [JsonIgnore]
-        [AllowNull]
+        [JsonIgnore, AllowNull]
+  
         public byte[]? Picture { get; set; } //Pictures are saved as memory stream
 
         public DateTime BirthDate { get; set; } = DateTime.Now;
@@ -38,11 +37,10 @@ namespace VetStat.Models
 
         public string? Password { get; set; }
 
-        [ForeignKey("City")]
-        [AllowNull]
+        [ForeignKey("City"), AllowNull]
         public int? CityId { get; set; }
 
-        //public City City { get; set; }
+        public City? City { get; set; }
 
     }
 }

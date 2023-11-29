@@ -7,19 +7,19 @@ namespace VetStat.Models
 {
     public class Employee : Person
     {
-        [Key]
-        [JsonIgnore]
+        [Key, JsonIgnore]
         public int Id { get; set; }
 
-        [ForeignKey("VetStation")]
-        public int VetStationId { get; set; }
-        public VetStation VetStation { get; set; }
+        [ForeignKey("VetStation"), AllowNull]
+        public int? VetStationId { get; set; }
+
+        [JsonIgnore, AllowNull]
+        public VetStation? VetStation { get; set; }
 
         [Required]
         public DateTime DateOfEmployment { get; set; }
 
-        [JsonIgnore]
-        [AllowNull]
+        [JsonIgnore,AllowNull]
         public Person? Person { get; set; }
     }
 }

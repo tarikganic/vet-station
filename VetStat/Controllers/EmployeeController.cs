@@ -30,24 +30,24 @@ namespace VetStat.Controllers
         [HttpGet("{id}")]
         public ActionResult<Employee> Get(int id)
         {
-                try
+            try
+            {
+                var employeeToDelete = _db.Employee.SingleOrDefault(x => x.Id == id);
+                if (employeeToDelete != null)
                 {
-                    var employeeToDelete = _db.Employee.SingleOrDefault(x => x.Id == id);
-                    if (employeeToDelete != null)
-                    {
-                        _db.Employee.Remove(employeeToDelete);
-                        _db.SaveChanges();
-                        return Ok("Object deleted!");
-                    }
-                    else
-                    {
-                        return NotFound($"Employee with ID {id} not found.");
-                    }
+                    _db.Employee.Remove(employeeToDelete);
+                    _db.SaveChanges();
+                    return Ok("Object deleted!");
                 }
-                catch (Exception ex)
+                else
                 {
-                    return BadRequest($"Could not delete: {ex.Message}");
+                    return NotFound($"Employee with ID {id} not found.");
                 }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Could not delete: {ex.Message}");
+            }
         }
 
     }
