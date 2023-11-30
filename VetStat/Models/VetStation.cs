@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace VetStat.Models
 {
@@ -10,7 +12,8 @@ namespace VetStat.Models
         public string? Name { get; set; }
         [ForeignKey("City")]
         public int CityId { get; set; }
-        public City City { get; set; }
+        [JsonIgnore,AllowNull]
+        public City? City { get; set; }
         public string ContactNumber { get; set; }  
     }
 }

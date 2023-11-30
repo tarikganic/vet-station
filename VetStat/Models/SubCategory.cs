@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace VetStat.Models
 {
@@ -9,7 +11,8 @@ namespace VetStat.Models
 
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
-        public Category Category { get; set; } 
+        [JsonIgnore, AllowNull]
+        public Category? Category { get; set; } 
 
     }
 }
