@@ -30,6 +30,13 @@ namespace VetStat.Helpers.Validators
   
         }
 
+        public static bool AdminValidator(Admin admin)
+        {
+            string passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$"; //Regex for password that is 8 characters long and it contains at least one uppercase letter, one lowercase letter, one digit, and one special character.
+            if (Regex.IsMatch(admin.Password, passwordPattern))
+                return true;
+            else throw new Exception("Invalid password");
+        }
         //Initial update
         public static void UpdateEntity<T>(T entityToUpdate, T updatedEntity) where T : Person
         { 
@@ -76,7 +83,17 @@ namespace VetStat.Helpers.Validators
                     nurse.Informations = updatedNurse.Informations;
             }
         }
+        public static void UpdateEntityCity<T>(T entityToUpdate, T updatedEntity) where T : City
+        {
+            if (!string.IsNullOrEmpty(updatedEntity.CityName))
+                entityToUpdate.CityName = updatedEntity.CityName;
+            if (!string.IsNullOrEmpty(updatedEntity.ZipCode))
+                entityToUpdate.ZipCode = updatedEntity.ZipCode;
+            if (!string.IsNullOrEmpty(updatedEntity.Country))
+                entityToUpdate.Country = updatedEntity.Country;
+            if (!string.IsNullOrEmpty(updatedEntity.Continent))
+                entityToUpdate.Continent = updatedEntity.Continent;
+        }
 
-    
     }
 }
