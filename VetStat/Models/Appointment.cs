@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace VetStat.Models
 {
@@ -10,33 +12,39 @@ namespace VetStat.Models
 
         //
 
-        [ForeignKey("Customer"), Required]
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        [ForeignKey("Customer")]
+        public int? CustomerId { get; set; }
+
+        [JsonIgnore, AllowNull]
+        public Customer? Customer { get; set; }
 
         //
 
-        [ForeignKey("VetStation"), Required]
-        public int VetStationId {get;set;}
-        public VetStation VetStation { get; set; }
+        [ForeignKey("VetStation")]
+        public int? VetStationId {get;set;}
+        [JsonIgnore, AllowNull]
+        public VetStation? VetStation { get; set; }
 
         // public ICollection<VetStation> VetStations { get; set; } = new List<VetStation>();
 
-        [ForeignKey("Employee"),Required]
-        public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        [ForeignKey("Employee")]
+        public int? EmployeeId { get; set; }
+        [JsonIgnore, AllowNull]
+        public Employee? Employee { get; set; }
 
         //
 
-        [ForeignKey("TimeSlot"), Required]
-        public int TimeSlotId { get; set; }
-        public TimeSlot TimeSlot { get; set; }
+        [ForeignKey("TimeSlot"), AllowNull]
+        public int? TimeSlotId { get; set; }
+        [JsonIgnore, AllowNull]
+        public TimeSlot? TimeSlot { get; set; }
 
         //
 
-        [ForeignKey("Animal"), Required]
-        public int AnimalId { get; set; }
-        public Animal Animal { get; set; }
+        [ForeignKey("Animal")]
+        public int? AnimalId { get; set; }
+        [JsonIgnore, AllowNull]
+        public Animal? Animal { get; set; }
 
     }
 }
