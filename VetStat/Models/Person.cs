@@ -40,6 +40,7 @@ namespace VetStat.Models
         [ForeignKey("City"), AllowNull]
         public int? CityId { get; set; }
 
+        [JsonIgnore, AllowNull]
         public City? City { get; set; }
 
     }

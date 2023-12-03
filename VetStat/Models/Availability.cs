@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace VetStat.Models
 {
@@ -10,9 +12,11 @@ namespace VetStat.Models
 
         //
 
-        [ForeignKey("Employee"), Required]
-        public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        [ForeignKey("Employee"), AllowNull]
+        public int? EmployeeId { get; set; }
+
+        [JsonIgnore, AllowNull]
+        public Employee? Employee { get; set; }
 
         //
 

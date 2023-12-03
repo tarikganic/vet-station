@@ -44,7 +44,7 @@ namespace VetStat.Controllers
         //api/Animal/Add
         [HttpPost]
 
-        public ActionResult<Animal> add([FromBody]Animal animal)
+        public ActionResult<Animal> Add([FromBody]Animal animal)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace VetStat.Controllers
             catch (Exception err)
             {
 
-                return BadRequest(err.Message);
+                return BadRequest(err.InnerException.Message);
             }
         }
 
