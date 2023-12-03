@@ -14,11 +14,11 @@ namespace VetStat.Models
         [ForeignKey("VetStation")]
         public int VetStationId { get; set; }
 
-        [JsonIgnore, AllowNull]
+        [JsonIgnore]        
         public VetStation? VetStation { get; set; }
         [ForeignKey("Product")]
         public int ProductId { get; set; }
-        [JsonIgnore, AllowNull]
+        [JsonIgnore]
         public Product? Product { get; set; }
         public int Quantity { get; set; }
         public DateTime DateOfEntry { get; set; } //When it arrived in the inventory

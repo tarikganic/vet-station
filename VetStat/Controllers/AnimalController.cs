@@ -30,7 +30,7 @@ namespace VetStat.Controllers
         }
 
         //api/Animal/Get/:Id
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
 
         public ActionResult<Animal> Get(int id)
         {
@@ -61,7 +61,7 @@ namespace VetStat.Controllers
         }
 
         //http/Animal/Edit/:id
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
 
         public ActionResult<Animal> Edit([FromBody] Animal animal, int id)
         {
@@ -88,7 +88,7 @@ namespace VetStat.Controllers
         }
 
         //api/Animal/Delete/:id
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
 
         public ActionResult Delete (int id)
         {

@@ -12,10 +12,10 @@ namespace VetStat.Models
 
         //
 
-        [ForeignKey("Employee"), AllowNull]
+        [ForeignKey("Employee")]
         public int? EmployeeId { get; set; }
-
-        [JsonIgnore, AllowNull]
+    
+        [JsonIgnore]
         public Employee? Employee { get; set; }
 
         //

@@ -28,7 +28,7 @@ namespace VetStat.Controllers
             return NoContent();
         }
         //api/Admin/Get/:id
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public ActionResult<Admin> Get(int id)
         {
             if (!_db.Admin.Where(x => x.Id == id).IsNullOrEmpty())
@@ -54,7 +54,7 @@ namespace VetStat.Controllers
             }
         }
         //api/Admin/Edit/:id
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public ActionResult Edit([FromBody] Admin admin, int id)
         {
             var _admin = _db.Admin.Where(x => x.Id == id).FirstOrDefault();
@@ -76,7 +76,7 @@ namespace VetStat.Controllers
 
         //api/Admin/Delete/:id
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
             try

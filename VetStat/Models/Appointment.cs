@@ -15,7 +15,7 @@ namespace VetStat.Models
         [ForeignKey("Customer")]
         public int? CustomerId { get; set; }
 
-        [JsonIgnore, AllowNull]
+        [JsonIgnore]
         public Customer? Customer { get; set; }
 
         //
@@ -29,21 +29,21 @@ namespace VetStat.Models
 
         [ForeignKey("Employee")]
         public int? EmployeeId { get; set; }
-        [JsonIgnore, AllowNull]
+        [JsonIgnore]
         public Employee? Employee { get; set; }
 
         //
 
-        [ForeignKey("TimeSlot"), AllowNull]
+        [ForeignKey("TimeSlot")]
         public int? TimeSlotId { get; set; }
-        [JsonIgnore, AllowNull]
+        [JsonIgnore]
         public TimeSlot? TimeSlot { get; set; }
 
         //
 
         [ForeignKey("Animal")]
         public int? AnimalId { get; set; }
-        [JsonIgnore, AllowNull]
+        [JsonIgnore]
         public Animal? Animal { get; set; }
 
     }
