@@ -56,7 +56,7 @@ namespace VetStat.Controllers
             catch (Exception err)
             {
 
-                return BadRequest(err.InnerException.Message);
+                return BadRequest(err.Message);
             }
         }
 
