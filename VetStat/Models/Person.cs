@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
 namespace VetStat.Models
@@ -20,14 +19,14 @@ namespace VetStat.Models
 
         public string? Phone { get; set; }
 
-        [ForeignKey("Role"), AllowNull]
+        [ForeignKey("Role")]
         public int? RoleId { get; set; }
 
-        [JsonIgnore, AllowNull]
+        [JsonIgnore]
     
         public Role? Role {get; set;}
 
-        [JsonIgnore, AllowNull]
+        [JsonIgnore]
   
         public byte[]? Picture { get; set; } //Pictures are saved as memory stream
 
@@ -37,10 +36,10 @@ namespace VetStat.Models
 
         public string? Password { get; set; }
 
-        [ForeignKey("City"), AllowNull]
+        [ForeignKey("City")]
         public int? CityId { get; set; }
 
-        [JsonIgnore, AllowNull]
+        [JsonIgnore]
         public City? City { get; set; }
 
     }

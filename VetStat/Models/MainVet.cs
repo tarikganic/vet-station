@@ -5,6 +5,5 @@ namespace VetStat.Models
 {
     public class MainVet : Vet
     {
-
     }
 }

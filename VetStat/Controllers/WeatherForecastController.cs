@@ -31,7 +31,7 @@ namespace Stat.Controllers
         }
 
         //api/[controller]/Get/:id
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public ActionResult<object> Get(int id)
         {
             var listFromDatabase = new List<object>() { new { Id = 1, Name = "Example1" }, new { Id = 2, Name = "Example2" } }; //_db.[DbSet].ToList();
@@ -62,7 +62,7 @@ namespace Stat.Controllers
         }
 
         //api/[controller]/Edit/:id
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public ActionResult Edit([FromBody] object obj, int id)
         {
             if (true) //e.g.
@@ -71,7 +71,7 @@ namespace Stat.Controllers
         }
 
         //api/[controller]/Delete/:id
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
             try
