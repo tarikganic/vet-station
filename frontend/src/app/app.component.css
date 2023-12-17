@@ -1,1 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter&family=Italiana&display=swap');
+.flex-container{
+  display: flex;
+  gap: 5px;
+}
