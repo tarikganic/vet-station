@@ -2,7 +2,6 @@
 
   <div class="flex-container">
     <h2 class="title">Log in</h2>
-
     <div class="text-inputs">
       <app-sign-in-input [inputValue]="this.usernameOrEmail" (valueChanged)="handleValueChanged($event,'usernameOrEmail')" inputType="text" title="Username / Email" [isError]="isError" ></app-sign-in-input>
       <app-sign-in-input [inputValue]="this.password" (valueChanged)="handleValueChanged($event, 'password')" inputType="password" title="Password" [isError]="isError"></app-sign-in-input>

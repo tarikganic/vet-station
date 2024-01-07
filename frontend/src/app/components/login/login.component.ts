@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
-import {NgClass} from "@angular/common";
+import {NgClass, NgForOf} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {SignInInputComponent} from "../sign-in-input/sign-in-input.component";
 import {OtherSignUpMethodsComponent} from "../other-sign-up-methods/other-sign-up-methods.component";
 import axios from "axios";
 import {Router, RouterLink} from "@angular/router";
-import {MyAuthService} from "../services/MyAuth";
+import {MyAuthService} from "../../services/MyAuth";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FaIconComponent, NgClass, FormsModule, SignInInputComponent, FormsModule, OtherSignUpMethodsComponent, RouterLink],
+  imports: [FaIconComponent, NgClass, FormsModule, SignInInputComponent, FormsModule, OtherSignUpMethodsComponent, RouterLink, NgForOf],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
