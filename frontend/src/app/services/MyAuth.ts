@@ -18,8 +18,8 @@ export class MyAuthService
   token:string|null = this.rememberMe?window.localStorage.getItem("my-auth-token"):window.sessionStorage.getItem("my-auth-token");
   IsLogged():boolean
   {
-    this.token = this.rememberMe?window.localStorage.getItem("my-auth-token"):window.sessionStorage.getItem("my-auth-token");
-
+    this.token = window.localStorage.getItem("my-auth-token")??window.sessionStorage.getItem("my-auth-token");
+    console.log(this.token)
     if (this.token != null)
     return this.token != " ";
     else return false;

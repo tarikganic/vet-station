@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import {Router, RouterOutlet} from '@angular/router';
 import {LoginComponent} from "./components/login/login.component";
+import {MyAuthService} from "./services/MyAuth";
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -9,8 +10,18 @@ import {LoginComponent} from "./components/login/login.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements  OnInit{
   title = 'frontend';
+
+  constructor(public myAuthToken: MyAuthService,private router:Router) {
+
+  }
+
+  ngOnInit() {
+    if (this.myAuthToken.IsLogged())
+      this.router.navigate(['home-page']);
+
+  }
 
   test(response:any)
   {

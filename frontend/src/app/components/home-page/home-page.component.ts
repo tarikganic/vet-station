@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MyAuthService} from "../../services/MyAuth";
+import {ProfileService} from "../../services/ProfileService";
 
 @Component({
   selector: 'app-home-page',
@@ -8,7 +9,13 @@ import {MyAuthService} from "../../services/MyAuth";
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
-export class HomePageComponent {
-constructor(public myAuthService:MyAuthService) {
+export class HomePageComponent implements OnInit{
+
+  ngOnInit() {
+this.profileService.getUserContent();
+  }
+
+  constructor(public myAuthService:MyAuthService,public profileService:ProfileService) {
+
 }
 }
