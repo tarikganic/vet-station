@@ -1,10 +1,6 @@
-
 .login-register-box
 {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
   width: 22.938rem;
   height: auto;
   padding: 1rem 0;
@@ -12,6 +8,11 @@
   background: #F7F5F0;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+
 }
 
 .flex-container
@@ -54,8 +55,15 @@ h3
   font-weight: 400;
   line-height: normal;
 }
-input[type=text]
+.text-inputs
 {
+  width: 100%;
+}
+
+.text-inputs input
+{
+  display: flex;
+  justify-content: space-between;
   border: none;
   width: 100%;
   height: 1.813rem;
@@ -65,25 +73,23 @@ input[type=text]
   outline: none;
   transition: 0.3s;
 }
-input[type=text]:focus{
+.text-inputs input:focus{
   outline: 1px solid rgb(128, 128, 128);
-  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25);
-
+  box-shadow: none;
 }
-input[type=text]:hover
+.text-inputs input:hover
 {
-  box-shadow: 0px 4px 2px 0px rgba(0, 0, 0, 0.25);
   box-shadow: none;
 }
 
-.container
+#password
 {
-  height: 2.6rem;
-  font-size: small;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  cursor: pointer;
+}
+form span
+{
+  cursor: pointer;
+  user-select: none;
 }
 
 form
@@ -116,8 +122,18 @@ button
 }
 button:hover
 {
-  background: #44b689;
 
+  background: #44b689;
+}
+button:focus
+{
+  outline: 1px solid green;
+}
+
+button:active
+{
+  box-shadow: none;
+  transition: 0.2s;
 }
 
 .flex-center-container
@@ -189,17 +205,18 @@ position: relative;
 
 .social-icons a {
   cursor: pointer;
+  background-color: white;
   border-radius: 50px;
-  color: #3f345f;
+  color: #3d3d41;
   display: inline-block;
   line-height: 52px;
   text-align: center;
   height: 50px;
   width: 50px;
-  box-shadow: 0 5px 25px rgba(93, 70, 232, 0.15);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   margin: 0px 15px;
   font-size: 22px;
-  transition: 1s ease all;
+  transition: 0.5s ease all;
 }
 .social-icons a:hover
 {
