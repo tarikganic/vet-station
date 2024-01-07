@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VetStat.Data;
 
@@ -11,9 +12,11 @@ using VetStat.Data;
 namespace VetStat.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231228230953_AuthentificationTokenTable")]
+    partial class AuthentificationTokenTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,9 +130,6 @@ namespace VetStat.Migrations
 
                     b.Property<string>("IpAdress")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("LoggTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Token")
                         .IsRequired()

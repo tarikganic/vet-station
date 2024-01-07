@@ -56,5 +56,6 @@ namespace VetStat.Data
         public DbSet<MainVet> MainVet => Set<MainVet>();
         public DbSet<Species> Species => Set<Species>();
         public DbSet<TimeSlot> TimeSlot => Set<TimeSlot>();
-     }
+        public DbSet<AuthentificationToken> AuthentificationToken => Set<AuthentificationToken>();
+    }
 }
