@@ -1,6 +1,7 @@
 <div class="fixed w-full z-20" title="container">
 
-<div class="topbar" title="navbar">  <!--flex justify-between-->
+
+<div class=" bg-beige h-16 shadow-md caret-transparent w-full flex justify-start items-start" title="navbar">  <!--flex justify-between-->
   <div *ngIf="this.myAuthService.IsLogged()" class="my-auto left-0 mx-6 active:bg-gray-300 active:bg-opacity-35 active:rounded-full p-1 cursor-pointer" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBackdrop" aria-controls="offcanvasWithBackdrop">
     <div class="h-[0.2rem] w-7 bg-gray-600 m-1 rounded-1"></div>
     <div class="h-[0.2rem] w-7 bg-gray-600 m-1 rounded-1"></div>
@@ -12,6 +13,7 @@
     <li class="cursor-pointer">Services</li>
     <li class="cursor-pointer">Locations</li>
   </ul>
+  <button *ngIf="myAuthService.IsLogged()" type="button" class="btn btn-outline-danger m-auto" (click)="myAuthService.LogOut()">Sign out</button>
 </div>
   <div class="offcanvas offcanvas-start w-auto" tabindex="-1" id="offcanvasWithBackdrop" aria-labelledby="offcanvasWithBackdropLabel" >
     <div class="side-panel-open" title="sidebar">

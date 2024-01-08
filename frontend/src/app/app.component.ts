@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {Router, RouterOutlet} from '@angular/router';
 import {LoginComponent} from "./components/login/login.component";
-import {MyAuthService} from "./services/MyAuth";
 import {NavbarComponent} from "./navbar/navbar.component";
+import {MyAuthService} from "./services/MyAuth";
 @Component({
   selector: 'app-root',
   standalone: true,
