@@ -1,0 +1,13 @@
+.card-container{
+    background-color: #f1f0ef;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    flex-direction: column;
+}
+.availabilities-work-type-container{
+    display: flex;
+    justify-content: space-between;
+}
+.location-distance{
+    text-align: center;
+}

@@ -5,10 +5,11 @@ module.exports = {
   ],
   theme: {
     extend:{
-      colors:
-        {
+      colors: {
       'turquoise-blue':"#33b3ae",
-          'beige':"#FAF9F6"
+          'beige':"#FAF9F6",
+          "rose-modified": "#ffc3ae",
+          "lightgreen-modified": "#f1f6be"
         }
 
     },
