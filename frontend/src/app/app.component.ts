@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import {Router, RouterOutlet} from '@angular/router';
 import {LoginComponent} from "./components/login/login.component";
 import {MyAuthService} from "./services/MyAuth";
+import {NavbarComponent} from "./navbar/navbar.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, LoginComponent],
+  imports: [CommonModule, RouterOutlet, LoginComponent, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
