@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
-import {faHome,faEnvelope, faShop, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faHome, faEnvelope, faShop, faUser, faGear} from "@fortawesome/free-solid-svg-icons";
+import {MyAuthService} from "../services/MyAuth";
+import {ChangeDetection} from "@angular/cli/lib/config/workspace-schema";
 
 @Component({
   selector: 'app-navbar',
@@ -13,12 +15,14 @@ import {faHome,faEnvelope, faShop, faUser} from "@fortawesome/free-solid-svg-ico
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent implements OnInit{
+export class NavbarComponent implements OnChanges{
 
-  ngOnInit() {
-  // document?.querySelector(".hamburger").addEventListener("click", () => {
-  //     document?.querySelector(".wrapper").classList.toggle("side-panel-open");
-  //   });
+  @Input() public isLogged: boolean = false;
+  constructor(public myAuthService: MyAuthService) {
+  }
+  ngOnChanges(changes:SimpleChanges) {
+    this.isLogged = this.myAuthService.IsLogged();
+    console.log(changes);
   }
 
 
@@ -27,4 +31,5 @@ export class NavbarComponent implements OnInit{
   protected readonly faUser = faUser;
   protected readonly faShop = faShop;
   protected readonly faEnvelope = faEnvelope;
+  protected readonly faGear = faGear;
 }
