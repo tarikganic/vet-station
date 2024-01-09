@@ -1,10 +1,10 @@
-<div class="w-80 h-96 bg-zinc-300 rounded-2xl card-container">
+<div class="w-80 h-96 bg-zinc-300 rounded-2xl card-container transition-all duration-150">
     <div class="w-80 h-36 bg-emerald-800 rounded-t-2xl flex justify-end items-end photo-section">
     </div>
-    <div class="w-80 h-7 flex items-center justify-center bg-emerald-400 shadow-md location-distance"> 
-        <span class="w-72 h-3 text-center text-white text-xs font-normal font-['Inter']">1km</span> 
+    <div class="w-80 inline-flex items-center bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20 cool-shadow">
+        <span class="w-72 h-3 text-center text-xs font-normal font-['Inter']">1km</span>
     </div>
-    
+
     <div class="m-3 flex justify-between h-3/5 flex-col desc-section">
         <div class="text-container">
             <h1 class="w-72 text-black text-xl font-semibold font-['Inter'] station-title">
@@ -15,7 +15,7 @@
             </h2>
             <div class="w-72 text-black text-xs font-normal font-['Inter'] station-details">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc lorem lorem, iaculis vitae est mattis, hendrerit mattis urna.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </div>
         </div>
 
@@ -26,8 +26,10 @@
                 <fa-icon class="w-6 h-5 text-black text-xl font-black font-['Font Awesome 5 Free']" [icon]="this.faWheelchair"></fa-icon>
             </div>
             <div class="flex w-1/2 gap-3 justify-end work-type-sec">
-                <div class="w-16 h-7 p-1 bg-rose-modified rounded-lg  in-office-button text-center shadow-lg text-xs">In Office</div>
-                <div class="w-16 h-7 p-1 bg-lightgreen-modified rounded-lg on-field-button text-center shadow-lg text-xs">On Field</div>
+              <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10 cool-shadow">In Office</span>
+              <span class="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20 cool-shadow">On Field</span>
+
+<!--                <div class="w-16 h-7 p-1 bg-lightgreen-modified rounded-lg on-field-button text-center cool-shadow text-xs">On Field</div>-->
             </div>
         </div>
     </div>
