@@ -33,7 +33,7 @@ checkBox:boolean = false;
 token :any;
 isError:boolean = false;
 
-  signIn = async () => {
+  signIn = () => {
 
 
     this.myAuthService.loginValue!.usernameOrEmail = this.usernameOrEmail;

@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faFilter} from "@fortawesome/free-solid-svg-icons";
 import {FormsModule} from "@angular/forms";
 import {InputButtonComponent} from "../input-button/input-button.component";
 import {NgForOf, NgIf} from "@angular/common";
-
+import {ElementRef} from "@angular/core";
 
 @Component({
   selector: 'app-input',
@@ -76,10 +76,18 @@ export class InputComponent {
         ]
       }
     ]
-
-
   filterIsClicked: boolean = false;
 
+constructor(private elementRef:ElementRef) {
+}
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event) {
+    const target = event.target as HTMLElement;
+
+    if (!this.elementRef.nativeElement.contains(target)) {
+      this.filterIsClicked = false;
+    }
+  }
   handleChange(temp: boolean, i:number, j:number) {
     temp = !temp;
     this.dropdown[i].children[j].value = temp;
