@@ -21,7 +21,6 @@ namespace VetStat.Data
             modelBuilder.Entity<Vet>().ToTable("Vet");
             modelBuilder.Entity<Nurse>().ToTable("Nurse");
             modelBuilder.Entity<Barber>().ToTable("Barber");
-            modelBuilder.Entity<Customer>().ToTable("Customer");
             modelBuilder.Entity<Person>().ToTable("Person");
             modelBuilder.Entity<MainVet>().ToTable("MainVet");   
 
@@ -32,16 +31,8 @@ namespace VetStat.Data
             .IsRequired(false);
 
 
-            modelBuilder.Entity<VetStation>()
-                .HasOne(s => s.MainVet)
-                .WithMany()
-                .HasForeignKey(e => e.MainVetId)
-                .IsRequired(true);
-
-
         }
         public DbSet<Person> Person => Set<Person>();
-        public DbSet<Customer> Customer => Set<Customer>();
         public DbSet<Nurse> Nurse => Set<Nurse>();
         public DbSet<Vet> Vet => Set<Vet>();
         public DbSet<Employee> Employee => Set<Employee>();

@@ -21,7 +21,7 @@ namespace VetStat.Helpers.Validators
             else throw new Exception($"Invalid password: {person.Password}");
         }
 
-        public static bool CustomerValidator(Customer customer) //todo -> make interfaces for generic method Validator<T>(T obj) where T : IPerson, ICustomer...
+        public static bool CustomerValidator(Person customer) //todo -> make interfaces for generic method Validator<T>(T obj) where T : IPerson, ICustomer...
         {
             PersonValidator(customer);
                 if (!(customer.MembershipLoyalty > 1 && customer.MembershipLoyalty < 0))

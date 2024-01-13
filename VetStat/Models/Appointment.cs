@@ -12,11 +12,11 @@ namespace VetStat.Models
 
         //
 
-        [ForeignKey("Customer")]
+        [ForeignKey("Person")]
         public int? CustomerId { get; set; }
 
         [JsonIgnore]
-        public Customer? Customer { get; set; }
+        public Person? Customer { get; set; }
 
         //
 

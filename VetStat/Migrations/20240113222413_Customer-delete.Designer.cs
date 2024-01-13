@@ -12,8 +12,8 @@ using VetStat.Data;
 namespace VetStat.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240111225946_vet-station-mainvet")]
-    partial class vetstationmainvet
+    [Migration("20240113222413_Customer-delete")]
+    partial class Customerdelete
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,9 @@ namespace VetStat.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
+
                     b.Property<byte[]>("MedicalFile")
                         .HasColumnType("varbinary(max)");
 
@@ -77,7 +80,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("AnimalSpeciesId");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Animal");
                 });
@@ -313,6 +316,9 @@ namespace VetStat.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<float?>("MembershipLoyalty")
+                        .HasColumnType("real");
+
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
@@ -321,6 +327,9 @@ namespace VetStat.Migrations
 
                     b.Property<byte[]>("Picture")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<DateTime>("ProfileCreationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("RoleId")
                         .HasColumnType("int");
@@ -511,19 +520,6 @@ namespace VetStat.Migrations
                     b.ToTable("VetStation");
                 });
 
-            modelBuilder.Entity("VetStat.Models.Customer", b =>
-                {
-                    b.HasBaseType("VetStat.Models.Person");
-
-                    b.Property<float?>("MembershipLoyalty")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("ProfileCreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.ToTable("Customer", (string)null);
-                });
-
             modelBuilder.Entity("VetStat.Models.Employee", b =>
                 {
                     b.HasBaseType("VetStat.Models.Person");
@@ -598,9 +594,9 @@ namespace VetStat.Migrations
                         .WithMany()
                         .HasForeignKey("AnimalSpeciesId");
 
-                    b.HasOne("VetStat.Models.Customer", "Customer")
+                    b.HasOne("VetStat.Models.Person", "Customer")
                         .WithMany()
-                        .HasForeignKey("OwnerId");
+                        .HasForeignKey("CustomerId");
 
                     b.Navigation("Customer");
 
@@ -613,7 +609,7 @@ namespace VetStat.Migrations
                         .WithMany()
                         .HasForeignKey("AnimalId");
 
-                    b.HasOne("VetStat.Models.Customer", "Customer")
+                    b.HasOne("VetStat.Models.Person", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId");
 
@@ -742,15 +738,6 @@ namespace VetStat.Migrations
                         .HasForeignKey("CityId");
 
                     b.Navigation("City");
-                });
-
-            modelBuilder.Entity("VetStat.Models.Customer", b =>
-                {
-                    b.HasOne("VetStat.Models.Person", null)
-                        .WithOne()
-                        .HasForeignKey("VetStat.Models.Customer", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("VetStat.Models.Employee", b =>
