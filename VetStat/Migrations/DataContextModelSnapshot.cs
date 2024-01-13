@@ -117,6 +117,34 @@ namespace VetStat.Migrations
                     b.ToTable("Appointment", (string)null);
                 });
 
+            modelBuilder.Entity("VetStat.Models.AuthentificationToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("IpAdress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LoggTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserProfileId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserProfileId");
+
+                    b.ToTable("AuthentificationToken");
+                });
+
             modelBuilder.Entity("VetStat.Models.Availability", b =>
                 {
                     b.Property<int>("Id")
@@ -593,6 +621,17 @@ namespace VetStat.Migrations
                     b.Navigation("TimeSlot");
 
                     b.Navigation("VetStation");
+                });
+
+            modelBuilder.Entity("VetStat.Models.AuthentificationToken", b =>
+                {
+                    b.HasOne("VetStat.Models.Person", "UserProfile")
+                        .WithMany()
+                        .HasForeignKey("UserProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserProfile");
                 });
 
             modelBuilder.Entity("VetStat.Models.Availability", b =>

@@ -10,7 +10,7 @@ namespace VetStat.Helpers.Validators
             //Initial validations
         public static bool PersonValidator(Person person) { 
             string passwordPattern = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$"; //Regex for password that is 8 characters long and it contains at least one uppercase letter, one lowercase letter, one digit, and one special character.
-            string emailPattern = @"^\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b";      //Regex for standard email form
+            string emailPattern = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$";      //Regex for standard email form
 
             if (Regex.IsMatch(person.Password, passwordPattern))
                 if (Regex.IsMatch(person.Email, emailPattern))
@@ -95,6 +95,12 @@ namespace VetStat.Helpers.Validators
                 entityToUpdate.Continent = updatedEntity.Continent;
         }
 
-
+         public static string GenerateToken(int length)
+    {
+        Random random = new Random();
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        return new string(Enumerable.Repeat(chars, length)
+            .Select(s => s[random.Next(s.Length)]).ToArray());
+    }
     }
 }
