@@ -29,7 +29,7 @@ namespace VetStat.Controllers
         }
 
         //api/TimeSlot/Get/:id
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         public ActionResult<TimeSlot> Get(int id)
         {
             if (!_db.TimeSlot.Where(x => x.Id == id).IsNullOrEmpty())
@@ -55,7 +55,7 @@ namespace VetStat.Controllers
         }
 
         //api/TimeSlot/Edit/:id
-        [HttpPut("{id:int}")]
+        [HttpPut("{id}")]
         public ActionResult Edit([FromBody] TimeSlot timeslot, int id)
         {
             var _timeslot = _db.TimeSlot.Where(x => x.Id == id).FirstOrDefault();
@@ -81,7 +81,7 @@ namespace VetStat.Controllers
 
         //api/TimeSlot/Delete/:id
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try

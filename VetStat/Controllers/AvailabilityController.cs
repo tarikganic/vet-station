@@ -29,8 +29,8 @@ namespace VetStat.Controllers
         }
 
         //api/Availability/Get/:Id
-        [HttpGet("{id:int}")]
-            
+        [HttpGet("{id}")]
+
         public ActionResult<Availability> Get(int id)
         {
             if (!_db.Availability.Where(x => x.Id == id).IsNullOrEmpty())
@@ -58,7 +58,7 @@ namespace VetStat.Controllers
         }
 
         //api/Availability/Edit/:id
-        [HttpPut("{id:int}")]
+        [HttpPut("{id}")]
 
         public ActionResult Edit([FromBody] Availability availability, int id)
         {
@@ -86,7 +86,7 @@ namespace VetStat.Controllers
         }
 
         //api/Availability/Delete/:id
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id}")]
 
         public ActionResult Delete(int id)
         {
