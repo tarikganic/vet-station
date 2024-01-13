@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using VetStat.Data;
 using VetStat.Helpers.Validators;
 using VetStat.Models;
-
+using System.Data.SqlClient;
 
 namespace VetStat.Controllers
 {
@@ -29,8 +30,8 @@ namespace VetStat.Controllers
         [HttpGet("{id}")]
         public ActionResult<VetStation> Get(int id)
         {
-            if(!_db.VetStation.Where(x=> x.Id == id).IsNullOrEmpty())
-                return Ok(_db.VetStation.Where(x =>  x.Id == id));
+            if (!_db.VetStation.Where(x => x.Id == id).IsNullOrEmpty())
+                return Ok(_db.VetStation.Where(x => x.Id == id));
             return NoContent();
         }
 
@@ -40,8 +41,12 @@ namespace VetStat.Controllers
         {
             try
             {
+
                 _db.VetStation.Add(vetStation);
                 _db.SaveChanges();
+
+                _db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [VetStation] OFF");
+
                 return Ok(vetStation);
             }
             catch (Exception ex)
@@ -55,6 +60,7 @@ namespace VetStat.Controllers
         public ActionResult Edit([FromBody] VetStation vetStation, int id)
         {
             var _vetStation = _db.VetStation.Where(x => x.Id == id).FirstOrDefault();
+
             try
             {
                 if (!string.IsNullOrEmpty(vetStation.Name))
@@ -63,6 +69,18 @@ namespace VetStat.Controllers
                     _vetStation.CityId = vetStation.CityId;
                 if (!string.IsNullOrEmpty(vetStation.ContactNumber))
                     _vetStation.ContactNumber = vetStation.ContactNumber;
+
+                if (_vetStation.IsInOffice != null)
+                    _vetStation.IsInOffice = vetStation.IsInOffice;
+                if (_vetStation.IsOnField != null)
+                    _vetStation.IsOnField = vetStation.IsOnField;
+                if (_vetStation.Parking != null)
+                    _vetStation.Parking = vetStation.Parking;
+                if (_vetStation.Wheelchair != null)
+                    _vetStation.Wheelchair = vetStation.Wheelchair;
+                if (_vetStation.Wifi != null)
+                    _vetStation.Wifi = vetStation.Wifi;
+
                 _db.SaveChanges();
                 return Ok(vetStation);
             }

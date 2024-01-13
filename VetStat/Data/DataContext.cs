@@ -26,8 +26,8 @@ namespace VetStat.Data
             .WithMany()
             .HasForeignKey(e => e.Id)
             .IsRequired(false);
-
             
+     
 
         }
         public DbSet<Person> Person => Set<Person>();
