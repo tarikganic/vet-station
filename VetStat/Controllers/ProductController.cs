@@ -27,7 +27,7 @@ namespace VetStat.Controllers
             return NoContent();
         }
         //api/Product/Get/:id
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public ActionResult<Product> Get(int id)
         {
             if (!_db.Product.Where(x => x.Id == id).IsNullOrEmpty())
@@ -51,7 +51,7 @@ namespace VetStat.Controllers
             }
         }
         //api/Product/Edit/:id
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public ActionResult Edit([FromBody] Product product, int id)
         {
             var _product = _db.Product.Where(x => x.Id == id).FirstOrDefault();
@@ -80,7 +80,7 @@ namespace VetStat.Controllers
 
         //api/Product/Delete/:id
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
             try

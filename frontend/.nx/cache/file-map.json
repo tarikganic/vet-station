@@ -1,0 +1,387 @@
+{
+  "version": "6.0",
+  "nxVersion": "17.2.8",
+  "deps": {
+    "@angular/animations": "^17.0.0",
+    "@angular/common": "^17.0.0",
+    "@angular/compiler": "^17.0.0",
+    "@angular/core": "^17.0.0",
+    "@angular/forms": "^17.0.0",
+    "@angular/platform-browser": "^17.0.0",
+    "@angular/platform-browser-dynamic": "^17.0.0",
+    "@angular/router": "^17.0.0",
+    "@fortawesome/angular-fontawesome": "^0.14.0",
+    "@fortawesome/fontawesome-svg-core": "^6.4.2",
+    "@fortawesome/free-brands-svg-icons": "^6.4.2",
+    "@fortawesome/free-regular-svg-icons": "^6.4.2",
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "angular-oauth2-oidc": "^17.0.1",
+    "axios": "^1.6.3",
+    "ng": "^0.0.0",
+    "router": "^1.3.8",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.2",
+    "@angular-builders/custom-webpack": "^17.0.0",
+    "@angular-devkit/build-angular": "^17.0.7",
+    "@angular-devkit/core": "^17.0.7",
+    "@angular-devkit/schematics": "^17.0.7",
+    "@angular/cli": "^17.0.7",
+    "@angular/compiler-cli": "^17.0.0",
+    "@nx/angular": "17.2.8",
+    "@nx/workspace": "17.2.8",
+    "@schematics/angular": "^17.0.7",
+    "@types/gapi": "^0.0.47",
+    "@types/jasmine": "~5.1.0",
+    "@types/node": "^20.10.6",
+    "autoprefixer": "^10.4.16",
+    "dotenv-webpack": "^8.0.1",
+    "jasmine-core": "~5.1.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "nx": "17.2.8",
+    "postcss": "^8.4.32",
+    "tailwindcss": "^3.4.0",
+    "typescript": "~5.2.2"
+  },
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "nonProjectFiles": [
+      {
+        "file": "package.json",
+        "hash": "12458967404997125895"
+      }
+    ],
+    "projectFileMap": {
+      "frontend": [
+        {
+          "file": ".editorconfig",
+          "hash": "6686520031028425313"
+        },
+        {
+          "file": ".gitignore",
+          "hash": "12021091861139663347"
+        },
+        {
+          "file": ".vscode/extensions.json",
+          "hash": "12343942279124280405"
+        },
+        {
+          "file": ".vscode/launch.json",
+          "hash": "17038929134016848735"
+        },
+        {
+          "file": ".vscode/tasks.json",
+          "hash": "5336636969995539451"
+        },
+        {
+          "file": "README.md",
+          "hash": "3615128890382494871"
+        },
+        {
+          "file": "nx.json",
+          "hash": "12303091938011644121"
+        },
+        {
+          "file": "package-lock.json",
+          "hash": "1683779789252216053"
+        },
+        {
+          "file": "package.json",
+          "hash": "4095148435021623581",
+          "deps": [
+            "npm:@angular/animations",
+            "npm:@angular/common",
+            "npm:@angular/compiler",
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/platform-browser",
+            "npm:@angular/platform-browser-dynamic",
+            "npm:@angular/router",
+            "npm:@fortawesome/angular-fontawesome",
+            "npm:@fortawesome/fontawesome-svg-core",
+            "npm:@fortawesome/free-brands-svg-icons",
+            "npm:@fortawesome/free-regular-svg-icons",
+            "npm:@fortawesome/free-solid-svg-icons",
+            "npm:angular-oauth2-oidc",
+            "npm:axios",
+            "npm:router",
+            "npm:rxjs",
+            "npm:tslib",
+            "npm:zone.js",
+            "npm:@angular-builders/custom-webpack",
+            "npm:@angular-devkit/build-angular",
+            "npm:@angular-devkit/core",
+            "npm:@angular-devkit/schematics",
+            "npm:@angular/cli",
+            "npm:@angular/compiler-cli",
+            "npm:@nx/angular",
+            "npm:@nx/workspace",
+            "npm:@schematics/angular",
+            "npm:@types/gapi",
+            "npm:@types/jasmine",
+            "npm:@types/node",
+            "npm:autoprefixer",
+            "npm:dotenv-webpack",
+            "npm:jasmine-core",
+            "npm:karma",
+            "npm:karma-chrome-launcher",
+            "npm:karma-coverage",
+            "npm:karma-jasmine",
+            "npm:karma-jasmine-html-reporter",
+            "npm:nx",
+            "npm:postcss",
+            "npm:tailwindcss",
+            "npm:typescript"
+          ]
+        },
+        {
+          "file": "project.json",
+          "hash": "17848869347567646326"
+        },
+        {
+          "file": "readme",
+          "hash": "12360834351849757395"
+        },
+        {
+          "file": "src/app/app.component.css",
+          "hash": "6287718409677416537"
+        },
+        {
+          "file": "src/app/app.component.html",
+          "hash": "9853996676758437794"
+        },
+        {
+          "file": "src/app/app.component.spec.ts",
+          "hash": "2340510284682825193",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/app.component.ts",
+          "hash": "12615974997347305693",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/app/app.config.ts",
+          "hash": "3523655234023615126",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:@angular/platform-browser",
+            "npm:@angular/common"
+          ]
+        },
+        {
+          "file": "src/app/app.routes.ts",
+          "hash": "14640897876278762340",
+          "deps": [
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/app/components/home-page/home-page.component.css",
+          "hash": "2235228811862767390"
+        },
+        {
+          "file": "src/app/components/home-page/home-page.component.html",
+          "hash": "12339317070864201706"
+        },
+        {
+          "file": "src/app/components/home-page/home-page.component.spec.ts",
+          "hash": "8248513240540082298",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/components/home-page/home-page.component.ts",
+          "hash": "8281182054227174897",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/components/login/LoginRequest.ts",
+          "hash": "6626950942347484376"
+        },
+        {
+          "file": "src/app/components/login/login.component.css",
+          "hash": "544898593626161411"
+        },
+        {
+          "file": "src/app/components/login/login.component.html",
+          "hash": "9046904860076122607"
+        },
+        {
+          "file": "src/app/components/login/login.component.spec.ts",
+          "hash": "13423884664040136397",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/components/login/login.component.ts",
+          "hash": "10558590101611473618",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@fortawesome/angular-fontawesome",
+            "npm:@angular/common",
+            "npm:@angular/forms",
+            "npm:axios",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/app/components/other-sign-up-methods/other-sign-up-methods.component.css",
+          "hash": "9855548285789281115"
+        },
+        {
+          "file": "src/app/components/other-sign-up-methods/other-sign-up-methods.component.html",
+          "hash": "9368979394014955196"
+        },
+        {
+          "file": "src/app/components/other-sign-up-methods/other-sign-up-methods.component.spec.ts",
+          "hash": "10842117532269102481",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/components/other-sign-up-methods/other-sign-up-methods.component.ts",
+          "hash": "327448589078652963",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@fortawesome/free-brands-svg-icons",
+            "npm:@fortawesome/angular-fontawesome",
+            "npm:@angular/common",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/app/components/sign-in-input/sign-in-input.component.css",
+          "hash": "13268484959699063568"
+        },
+        {
+          "file": "src/app/components/sign-in-input/sign-in-input.component.html",
+          "hash": "8390779773046404932"
+        },
+        {
+          "file": "src/app/components/sign-in-input/sign-in-input.component.spec.ts",
+          "hash": "8683796919749815600",
+          "deps": [
+            "npm:@angular/core"
+          ]
+        },
+        {
+          "file": "src/app/components/sign-in-input/sign-in-input.component.ts",
+          "hash": "10804259523713967305",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/forms",
+            "npm:@angular/common"
+          ]
+        },
+        {
+          "file": "src/app/services/GoogleLoginService.ts",
+          "hash": "5981424391107281572",
+          "deps": [
+            "npm:@angular/core",
+            "npm:angular-oauth2-oidc"
+          ]
+        },
+        {
+          "file": "src/app/services/MyAuth.ts",
+          "hash": "1653319196342334972",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router",
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "src/app/services/ProfileService.ts",
+          "hash": "11203350624366172157",
+          "deps": [
+            "npm:@angular/core",
+            "npm:axios"
+          ]
+        },
+        {
+          "file": "src/app/services/UserProfile.ts",
+          "hash": "17039064968671340436"
+        },
+        {
+          "file": "src/assets/.gitkeep",
+          "hash": "3244421341483603138"
+        },
+        {
+          "file": "src/favicon.ico",
+          "hash": "3988961587069885523"
+        },
+        {
+          "file": "src/helper/authLogin.ts",
+          "hash": "12022599621898845761",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/helper/my-auth-interceptor.ts",
+          "hash": "4917795218173540475",
+          "deps": [
+            "npm:@angular/core",
+            "npm:@angular/common",
+            "npm:rxjs",
+            "npm:@angular/router"
+          ]
+        },
+        {
+          "file": "src/index.html",
+          "hash": "17038894145296075292"
+        },
+        {
+          "file": "src/main.ts",
+          "hash": "4927504514031276065",
+          "deps": [
+            "npm:@angular/platform-browser"
+          ]
+        },
+        {
+          "file": "src/manifest.json",
+          "hash": "13877232446847509904"
+        },
+        {
+          "file": "src/styles.css",
+          "hash": "4485259066409502489"
+        },
+        {
+          "file": "tailwind.config.js",
+          "hash": "7601031578553540284"
+        },
+        {
+          "file": "tsconfig.app.json",
+          "hash": "13605725405145530426"
+        },
+        {
+          "file": "tsconfig.json",
+          "hash": "6830907402848794383"
+        },
+        {
+          "file": "tsconfig.spec.json",
+          "hash": "15575553540147145788"
+        }
+      ]
+    }
+  }
+}

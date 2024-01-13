@@ -12,20 +12,20 @@ namespace VetStat.Models
         [Required]
         public string? Name { get; set; }
 
-        [ForeignKey("Customer"), AllowNull]
+        [ForeignKey("Customer")]
         public int? OwnerId { get; set; }
 
-        [JsonIgnore, AllowNull]
+        [JsonIgnore]
    
 
         public Customer? Customer { get; set; }
 
         // public Person Id {get;set;}
         public DateTime BirthDate {get;set; }
-        [ForeignKey ("Species"), AllowNull]
+        [ForeignKey("Species")]
 
         public int? AnimalSpeciesId { get; set; }
-        [JsonIgnore, AllowNull]
+        [JsonIgnore]
 
         public Species? Species { get; set; }
         public byte[]? Picture { get; set; }

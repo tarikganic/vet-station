@@ -27,7 +27,7 @@ namespace VetStat.Controllers
             return NoContent();
         }
         //api/SubCategory/Get/:id
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public ActionResult<SubCategory> Get(int id)
         {
             if (!_db.SubCategory.Where(x => x.Id == id).IsNullOrEmpty())
@@ -51,7 +51,7 @@ namespace VetStat.Controllers
             }
         }
         //api/SubCategory/Edit/:id
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public ActionResult Edit([FromBody] SubCategory subCategory, int id)
         {
             var _subCategory = _db.SubCategory.Where(x => x.Id == id).FirstOrDefault();
@@ -70,7 +70,7 @@ namespace VetStat.Controllers
 
         //api/SubCategory/Delete/:id
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
             try

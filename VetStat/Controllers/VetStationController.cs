@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using VetStat.Data;
-using VetStat.Helpers.Validators;
 using VetStat.Models;
 using System.Data.SqlClient;
 
@@ -27,7 +26,7 @@ namespace VetStat.Controllers
         }
 
         //api/VetStation/Get/:id
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public ActionResult<VetStation> Get(int id)
         {
             if (!_db.VetStation.Where(x => x.Id == id).IsNullOrEmpty())
@@ -51,12 +50,12 @@ namespace VetStat.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.InnerException.Message);
+                return BadRequest(ex.Message);
             }
         }
 
         //api/VetStation/Edit
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public ActionResult Edit([FromBody] VetStation vetStation, int id)
         {
             var _vetStation = _db.VetStation.Where(x => x.Id == id).FirstOrDefault();
@@ -91,7 +90,7 @@ namespace VetStat.Controllers
         }
 
         //api/VetStation/Delete
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public ActionResult Delete(int id)
         {
             try

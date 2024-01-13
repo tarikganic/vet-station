@@ -12,9 +12,9 @@ namespace VetStat.Models
 
         //
 
-        [ForeignKey("Availability"), AllowNull]
+        [ForeignKey("Availability")]
         public int? AvailabilityId { get; set; }
-        [JsonIgnore, AllowNull]
+        [JsonIgnore]
         public Availability? Availability { get; set; }
 
         //
@@ -23,9 +23,9 @@ namespace VetStat.Models
 
         //
 
-        [ForeignKey("Employee"),AllowNull]
+        [ForeignKey("Employee")]
         public int? SlotEmployeeId { get; set; }
-        [JsonIgnore, AllowNull]
+        [JsonIgnore]
         public Employee? Employee { get; set; }
 
         //
