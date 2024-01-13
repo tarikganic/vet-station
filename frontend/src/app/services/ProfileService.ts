@@ -20,7 +20,7 @@ export class ProfileService {
     var link = "https://localhost:44308/api/ProfileEndpoint/GetUserInfo/"
     await axios.get(link + this.myAuthService.token,{headers:{'my-auth-token': this.myAuthService.token}}).then(x=> {
       this.userProfile = x.data
-      console.log(this.userProfile);
+    //  console.log(this.userProfile);
     }).catch(x=>console.log(x));
   }
 

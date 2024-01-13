@@ -1,10 +1,11 @@
-import {Component, HostListener} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faFilter} from "@fortawesome/free-solid-svg-icons";
 import {FormsModule} from "@angular/forms";
 import {InputButtonComponent} from "../input-button/input-button.component";
 import {NgForOf, NgIf} from "@angular/common";
 import {ElementRef} from "@angular/core";
+import {VetStationService} from "../../../services/VetStationSearch";
 
 @Component({
   selector: 'app-input',
@@ -23,63 +24,14 @@ export class InputComponent {
 
   protected readonly faFilter = faFilter;
 
-  dropdown =
-    [
-      {
-        "key": 0,
-        "title":"Location",
-  "children":[
-{
-  'key': 0,
-  'name': 'Closest Station',
-  'value': false,
-}
-    ]
-      },
-      {
-        "key": 1,
-        "title":"Service type",
-        "children":[
-          {
-            'key': 0,
-            'name': 'In Office',
-            'value': false,
-          },
-          {
-            'key': 1,
-            'name':'On Field',
-            'value': false,
-          }
-
-        ]
-      },
-      {
-        "key": 2,
-        "title":"Accommodation",
-        "children":[
-          {
-            'key': 0,
-            'name': 'Parking',
-            'value': false,
-          },
-          {
-            'key': 1,
-            'name':'Wheelchair',
-            'value': false,
-          },
-          {
-            'key': 2,
-            'name':'Wi-fi',
-            'value': false,
-          }
-
-        ]
-      }
-    ]
   filterIsClicked: boolean = false;
+  @Output() handleChangeFilter = this.vetStationService.dropdown;
 
-constructor(private elementRef:ElementRef) {
+constructor(private elementRef:ElementRef, public vetStationService:VetStationService) {
 }
+
+@Output() searchVetStation:EventEmitter<any> = new EventEmitter<any>();
+@Input() searchValue?: string
   @HostListener('document:click', ['$event'])
   clickOutside(event: Event) {
     const target = event.target as HTMLElement;
@@ -90,7 +42,9 @@ constructor(private elementRef:ElementRef) {
   }
   handleChange(temp: boolean, i:number, j:number) {
     temp = !temp;
-    this.dropdown[i].children[j].value = temp;
-console.log(this.dropdown[i].children[j])
+    console.log(this.vetStationService.dropdown)
+    this.vetStationService.dropdown[i].children[j].value = temp;
+    this.vetStationService.setValues();
+//console.log(this.dropdown[i].children[j])
   }
 }
