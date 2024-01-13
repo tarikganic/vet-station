@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using VetStat.Endpoints.VetStationSearch;
 using VetStat.Helpers.Services;
 using VetStat.Helpers.Validators;
 
@@ -16,6 +17,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddTransient<AuthService>();
+//builder.Services.AddScoped<IVetStationSearchRequest,VetStationSearchResponse>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

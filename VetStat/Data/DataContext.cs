@@ -30,14 +30,8 @@ namespace VetStat.Data
             .WithMany()
             .HasForeignKey(e => e.Id)
             .IsRequired(false);
-
-
-            modelBuilder.Entity<VetStation>()
-                .HasOne(s => s.MainVet)
-                .WithMany()
-                .HasForeignKey(e => e.MainVetId)
-                .IsRequired(true);
-
+            
+     
 
         }
         public DbSet<Person> Person => Set<Person>();

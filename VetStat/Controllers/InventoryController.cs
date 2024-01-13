@@ -41,8 +41,8 @@ namespace VetStat.Controllers
         {
             try
             {
-                if (_db.VetStation.Where(x=> x.Id == inventory.VetStationId).IsNullOrEmpty())
-                    throw new Exception("samir"); 
+                if (_db.VetStation.Where(x => x.Id == inventory.VetStationId).IsNullOrEmpty())
+                    throw new Exception("samir");
                 _db.Inventory.Add(inventory);
                 _db.SaveChanges();
                 return Ok(inventory);

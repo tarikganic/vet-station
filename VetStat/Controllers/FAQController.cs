@@ -61,8 +61,8 @@ namespace VetStat.Controllers
                     _faq.Question = faq.Question;
                 if (!string.IsNullOrEmpty(faq.Answer))
                     _faq.Answer = faq.Answer;
-                if (!string.IsNullOrEmpty(faq.VetStationId.ToString()))
-                    _faq.VetStationId = faq.VetStationId;
+                //if (!string.IsNullOrEmpty(faq.VetStationId.ToString()))
+                //    _faq.VetStationId = faq.VetStationId;
 
                 _db.SaveChanges();
                 return Ok(faq);

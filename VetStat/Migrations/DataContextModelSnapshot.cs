@@ -142,7 +142,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("UserProfileId");
 
-                    b.ToTable("AuthentificationToken");
+                    b.ToTable("AuthentificationToken", (string)null);
                 });
 
             modelBuilder.Entity("VetStat.Models.Availability", b =>
@@ -476,25 +476,34 @@ namespace VetStat.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CityId")
+                    b.Property<int?>("CityId")
                         .HasColumnType("int");
 
                     b.Property<string>("ContactNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("MainVetId")
-                        .IsRequired()
-                        .HasColumnType("int");
+                    b.Property<bool>("IsInOffice")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsOnField")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("Parking")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Wheelchair")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Wifi")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
-
-                    b.HasIndex("MainVetId");
 
                     b.ToTable("VetStation", (string)null);
                 });
@@ -571,6 +580,11 @@ namespace VetStat.Migrations
             modelBuilder.Entity("VetStat.Models.MainVet", b =>
                 {
                     b.HasBaseType("VetStat.Models.Vet");
+
+                    b.Property<int>("ChiefVetStationId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("ChiefVetStationId");
 
                     b.ToTable("MainVet", (string)null);
                 });
@@ -722,9 +736,7 @@ namespace VetStat.Migrations
                 {
                     b.HasOne("VetStat.Models.City", "City")
                         .WithMany()
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CityId");
 
                     b.HasOne("VetStat.Models.MainVet", "MainVet")
                         .WithMany()
@@ -790,11 +802,19 @@ namespace VetStat.Migrations
 
             modelBuilder.Entity("VetStat.Models.MainVet", b =>
                 {
+                    b.HasOne("VetStat.Models.VetStation", "ChiefVetStation")
+                        .WithMany()
+                        .HasForeignKey("ChiefVetStationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("VetStat.Models.Vet", null)
                         .WithOne()
                         .HasForeignKey("VetStat.Models.MainVet", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ChiefVetStation");
                 });
 
             modelBuilder.Entity("VetStat.Models.Product", b =>
