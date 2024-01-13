@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VetStat.Models;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+using System.Collections;
+using System.Reflection.Metadata;
 
 namespace VetStat.Data
 {
@@ -9,11 +10,6 @@ namespace VetStat.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-       //optionsBuilder.ConfigureWarnings(wa => wa.Ignore(RelationalEventId.ForeignKeyPropertiesMappedToUnrelatedTables));
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -36,9 +32,13 @@ namespace VetStat.Data
         }
         public DbSet<Person> Person => Set<Person>();
         public DbSet<Customer> Customer => Set<Customer>();
+
         public DbSet<Nurse> Nurse => Set<Nurse>();
+
         public DbSet<Vet> Vet => Set<Vet>();
+
         public DbSet<Employee> Employee => Set<Employee>();
+
         public DbSet<Role> Role => Set<Role>();
         public DbSet<Barber> Barber => Set<Barber>();
         public DbSet<Admin> Admin => Set<Admin>();
@@ -49,7 +49,7 @@ namespace VetStat.Data
         public DbSet<Product> Product => Set<Product>();
         public DbSet<SubCategory> SubCategory => Set<SubCategory>();   
         public DbSet<Category> Category => Set<Category>();
-        
+
         public DbSet<Animal> Animal => Set<Animal>();
         public DbSet<Appointment> Appointment => Set<Appointment>();
         public DbSet<Availability> Availability => Set<Availability>();

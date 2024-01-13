@@ -27,7 +27,7 @@ namespace VetStat.Controllers
         }
 
         //api/Vet/Get/:id
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         public ActionResult<Vet> Get(int id)
         {
             if (!_db.Vet.Where(x => x.Id == id).IsNullOrEmpty())
@@ -54,7 +54,7 @@ namespace VetStat.Controllers
         }
 
         //api/Vet/Edit/:id
-        [HttpPut("{id:int}")]
+        [HttpPut("{id}")]
         public ActionResult Edit([FromBody] Vet vet, int id)
         {
             var _vet = _db.Vet.Where(x => x.Id == id).FirstOrDefault();
@@ -74,7 +74,7 @@ namespace VetStat.Controllers
         }
 
         //api/Vet/Delete/:id
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try

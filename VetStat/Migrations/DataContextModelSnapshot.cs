@@ -483,17 +483,11 @@ namespace VetStat.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-<<<<<<< HEAD
                     b.Property<bool>("IsInOffice")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsOnField")
                         .HasColumnType("bit");
-=======
-                    b.Property<int?>("MainVetId")
-                        .IsRequired()
-                        .HasColumnType("int");
->>>>>>> fa890ea34b87cf98e471ba6db46df610178a1c03
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -511,11 +505,6 @@ namespace VetStat.Migrations
 
                     b.HasIndex("CityId");
 
-<<<<<<< HEAD
-=======
-                    b.HasIndex("MainVetId");
-
->>>>>>> fa890ea34b87cf98e471ba6db46df610178a1c03
                     b.ToTable("VetStation", (string)null);
                 });
 
@@ -749,15 +738,7 @@ namespace VetStat.Migrations
                         .WithMany()
                         .HasForeignKey("CityId");
 
-                    b.HasOne("VetStat.Models.MainVet", "MainVet")
-                        .WithMany()
-                        .HasForeignKey("MainVetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("City");
-
-                    b.Navigation("MainVet");
                 });
 
             modelBuilder.Entity("VetStat.Models.Customer", b =>
@@ -776,7 +757,7 @@ namespace VetStat.Migrations
                         .HasForeignKey("Id");
 
                     b.HasOne("VetStat.Models.VetStation", "VetStation")
-                        .WithMany("Employees")
+                        .WithMany()
                         .HasForeignKey("VetStationId");
 
                     b.Navigation("Person");
@@ -831,11 +812,6 @@ namespace VetStat.Migrations
             modelBuilder.Entity("VetStat.Models.Product", b =>
                 {
                     b.Navigation("SubCategories");
-                });
-
-            modelBuilder.Entity("VetStat.Models.VetStation", b =>
-                {
-                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }

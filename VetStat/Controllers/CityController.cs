@@ -26,7 +26,7 @@ namespace VetStat.Controllers
             return NoContent();
         }
         //api/City/Get/:id
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         public ActionResult<City> Get(int id)
         {
             if (!_db.City.Where(x => x.Id == id).IsNullOrEmpty())
@@ -50,7 +50,7 @@ namespace VetStat.Controllers
             }
         }
         //api/City/Edit/:id
-        [HttpPut("{id:int}")]
+        [HttpPut("{id}")]
         public ActionResult Edit([FromBody] City city, int id)
         {
             var _city = _db.City.Where(x => x.Id == id).FirstOrDefault();
@@ -67,7 +67,7 @@ namespace VetStat.Controllers
         }
 
         //api/City/Delete/:id
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try

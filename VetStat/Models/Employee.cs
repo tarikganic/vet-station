@@ -10,16 +10,16 @@ namespace VetStat.Models
         [Key, JsonIgnore]
         public int Id { get; set; }
 
-        [ForeignKey("VetStation")]
+        [ForeignKey("VetStation"), AllowNull]
         public int? VetStationId { get; set; }
 
-        [JsonIgnore]
+        [JsonIgnore, AllowNull]
         public VetStation? VetStation { get; set; }
 
         [Required]
         public DateTime DateOfEmployment { get; set; }
 
-        [JsonIgnore]
+        [JsonIgnore,AllowNull]
         public Person? Person { get; set; }
     }
 }

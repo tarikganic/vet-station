@@ -27,7 +27,7 @@ namespace VetStat.Controllers
             return NoContent();
         }
         //api/Inventory/Get/:id
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
         public ActionResult<Inventory> Get(int id)
         {
             if (!_db.Inventory.Where(x => x.Id == id).IsNullOrEmpty())
@@ -53,7 +53,7 @@ namespace VetStat.Controllers
             }
         }
         //api/Inventory/Edit/:id
-        [HttpPut("{id:int}")]
+        [HttpPut("{id}")]
         public ActionResult Edit([FromBody] Inventory inventory, int id)
         {
             var _inventory = _db.Inventory.Where(x => x.Id == id).FirstOrDefault();
@@ -83,7 +83,7 @@ namespace VetStat.Controllers
 
         //api/Admin/Delete/:id
 
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
             try

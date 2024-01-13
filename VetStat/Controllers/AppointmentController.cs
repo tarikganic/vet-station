@@ -27,7 +27,7 @@ namespace VetStat.Controllers
         }
 
         //api/Appointment/Get/:id
-        [HttpGet("{id:int}")]
+        [HttpGet("{id}")]
 
         public ActionResult<Appointment> Get(int id)
         {
@@ -55,7 +55,7 @@ namespace VetStat.Controllers
         }
 
         //api/Appointment/Edit/:id
-        [HttpPut("{id:int}")]
+        [HttpPut("{id}")]
 
         public ActionResult Edit([FromBody] Appointment appointment, int id)
         {
@@ -83,7 +83,7 @@ namespace VetStat.Controllers
         }
 
         //api/Appointment/Delete
-        [HttpDelete("{id:int}")]
+        [HttpDelete("{id}")]
 
         public ActionResult Delete(int id)
         {

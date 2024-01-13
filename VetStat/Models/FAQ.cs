@@ -14,7 +14,7 @@ namespace VetStat.Models
         
         [ForeignKey("VetStation")]
         public int VetStationId { get; set; }
-        [JsonIgnore]
+        [JsonIgnore, AllowNull]
         public VetStation? VetStation { get; set; }
 
     }
