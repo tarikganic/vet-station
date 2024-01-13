@@ -17,7 +17,7 @@ namespace VetStat.Models
         public int? CityId { get; set; }
         [JsonIgnore,AllowNull]
         public City? City { get; set; }
-        public string ContactNumber { get; set; } 
+        public string ContactNumber { get; set; }
 
         //Service types and accommodation
         public bool IsInOffice { get; set; } = false; //false -> default

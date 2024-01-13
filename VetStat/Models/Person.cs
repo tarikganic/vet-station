@@ -42,5 +42,9 @@ namespace VetStat.Models
         [JsonIgnore]
         public City? City { get; set; }
 
+        public DateTime ProfileCreationDate { get; set; }
+
+        public float? MembershipLoyalty { get; set; }  //Discount     
+
     }
 }

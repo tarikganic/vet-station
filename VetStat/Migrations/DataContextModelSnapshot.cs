@@ -40,7 +40,7 @@ namespace VetStat.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Admin", (string)null);
+                    b.ToTable("Admin");
                 });
 
             modelBuilder.Entity("VetStat.Models.Animal", b =>
@@ -56,6 +56,9 @@ namespace VetStat.Migrations
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int?>("CustomerId")
+                        .HasColumnType("int");
 
                     b.Property<byte[]>("MedicalFile")
                         .HasColumnType("varbinary(max)");
@@ -74,9 +77,9 @@ namespace VetStat.Migrations
 
                     b.HasIndex("AnimalSpeciesId");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("CustomerId");
 
-                    b.ToTable("Animal", (string)null);
+                    b.ToTable("Animal");
                 });
 
             modelBuilder.Entity("VetStat.Models.Appointment", b =>
@@ -114,7 +117,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("VetStationId");
 
-                    b.ToTable("Appointment", (string)null);
+                    b.ToTable("Appointment");
                 });
 
             modelBuilder.Entity("VetStat.Models.AuthentificationToken", b =>
@@ -142,7 +145,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("UserProfileId");
 
-                    b.ToTable("AuthentificationToken", (string)null);
+                    b.ToTable("AuthentificationToken");
                 });
 
             modelBuilder.Entity("VetStat.Models.Availability", b =>
@@ -172,7 +175,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Availability", (string)null);
+                    b.ToTable("Availability");
                 });
 
             modelBuilder.Entity("VetStat.Models.Category", b =>
@@ -189,7 +192,7 @@ namespace VetStat.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category", (string)null);
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("VetStat.Models.City", b =>
@@ -214,7 +217,7 @@ namespace VetStat.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("City", (string)null);
+                    b.ToTable("City");
                 });
 
             modelBuilder.Entity("VetStat.Models.FAQ", b =>
@@ -240,7 +243,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("VetStationId");
 
-                    b.ToTable("FAQ", (string)null);
+                    b.ToTable("FAQ");
                 });
 
             modelBuilder.Entity("VetStat.Models.Inventory", b =>
@@ -282,7 +285,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("VetStationId");
 
-                    b.ToTable("Inventory", (string)null);
+                    b.ToTable("Inventory");
                 });
 
             modelBuilder.Entity("VetStat.Models.Person", b =>
@@ -310,6 +313,9 @@ namespace VetStat.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<float?>("MembershipLoyalty")
+                        .HasColumnType("real");
+
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
@@ -318,6 +324,9 @@ namespace VetStat.Migrations
 
                     b.Property<byte[]>("Picture")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<DateTime>("ProfileCreationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("RoleId")
                         .HasColumnType("int");
@@ -364,7 +373,7 @@ namespace VetStat.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product", (string)null);
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("VetStat.Models.Role", b =>
@@ -381,7 +390,7 @@ namespace VetStat.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Role", (string)null);
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("VetStat.Models.Species", b =>
@@ -409,7 +418,7 @@ namespace VetStat.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Species", (string)null);
+                    b.ToTable("Species");
                 });
 
             modelBuilder.Entity("VetStat.Models.SubCategory", b =>
@@ -436,7 +445,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("SubCategory", (string)null);
+                    b.ToTable("SubCategory");
                 });
 
             modelBuilder.Entity("VetStat.Models.TimeSlot", b =>
@@ -465,7 +474,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("SlotEmployeeId");
 
-                    b.ToTable("TimeSlot", (string)null);
+                    b.ToTable("TimeSlot");
                 });
 
             modelBuilder.Entity("VetStat.Models.VetStation", b =>
@@ -505,20 +514,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("CityId");
 
-                    b.ToTable("VetStation", (string)null);
-                });
-
-            modelBuilder.Entity("VetStat.Models.Customer", b =>
-                {
-                    b.HasBaseType("VetStat.Models.Person");
-
-                    b.Property<float?>("MembershipLoyalty")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("ProfileCreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.ToTable("Customer", (string)null);
+                    b.ToTable("VetStation");
                 });
 
             modelBuilder.Entity("VetStat.Models.Employee", b =>
@@ -533,7 +529,7 @@ namespace VetStat.Migrations
 
                     b.HasIndex("VetStationId");
 
-                    b.ToTable("Employee", (string)null);
+                    b.ToTable("Employee");
                 });
 
             modelBuilder.Entity("VetStat.Models.Barber", b =>
@@ -595,9 +591,9 @@ namespace VetStat.Migrations
                         .WithMany()
                         .HasForeignKey("AnimalSpeciesId");
 
-                    b.HasOne("VetStat.Models.Customer", "Customer")
+                    b.HasOne("VetStat.Models.Person", "Customer")
                         .WithMany()
-                        .HasForeignKey("OwnerId");
+                        .HasForeignKey("CustomerId");
 
                     b.Navigation("Customer");
 
@@ -610,7 +606,7 @@ namespace VetStat.Migrations
                         .WithMany()
                         .HasForeignKey("AnimalId");
 
-                    b.HasOne("VetStat.Models.Customer", "Customer")
+                    b.HasOne("VetStat.Models.Person", "Customer")
                         .WithMany()
                         .HasForeignKey("CustomerId");
 
@@ -738,24 +734,7 @@ namespace VetStat.Migrations
                         .WithMany()
                         .HasForeignKey("CityId");
 
-                    b.HasOne("VetStat.Models.MainVet", "MainVet")
-                        .WithMany()
-                        .HasForeignKey("MainVetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("City");
-
-                    b.Navigation("MainVet");
-                });
-
-            modelBuilder.Entity("VetStat.Models.Customer", b =>
-                {
-                    b.HasOne("VetStat.Models.Person", null)
-                        .WithOne()
-                        .HasForeignKey("VetStat.Models.Customer", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("VetStat.Models.Employee", b =>
@@ -765,7 +744,7 @@ namespace VetStat.Migrations
                         .HasForeignKey("Id");
 
                     b.HasOne("VetStat.Models.VetStation", "VetStation")
-                        .WithMany("Employees")
+                        .WithMany()
                         .HasForeignKey("VetStationId");
 
                     b.Navigation("Person");
@@ -820,11 +799,6 @@ namespace VetStat.Migrations
             modelBuilder.Entity("VetStat.Models.Product", b =>
                 {
                     b.Navigation("SubCategories");
-                });
-
-            modelBuilder.Entity("VetStat.Models.VetStation", b =>
-                {
-                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }
