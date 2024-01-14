@@ -1,0 +1,21 @@
+<div class="m-auto flex justify-center" title="container">
+  <div class="login-register-box">
+    <div class="flex-container" title="inputSection">
+      <h2 class="title">Register</h2>
+      <div class="text-inputs">
+        <app-sign-in-input inputType="text" title="Email"></app-sign-in-input>
+        <app-sign-in-input inputType="text" title="Username"></app-sign-in-input>
+        <app-sign-in-input inputType="password" title="Password"></app-sign-in-input>
+    </div>
+    <div class="flex flex-col w-full justify-center items-center">
+      <div class="flex-center-container m-3" title="singInButton">
+        <button id="signInButton" routerLink="/home-page">Register</button>
+      </div>
+      <footer>
+        <app-other-sign-up-methods [isLogin]="true"></app-other-sign-up-methods>
+      </footer>
+      
+    </div>
+
+</div>
+</div>
