@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VetStat.Migrations
 {
     /// <inheritdoc />
-    public partial class Update2 : Migration
+    public partial class updatemigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -60,8 +60,8 @@ namespace VetStat.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Manufacturer = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Manufacturer = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SubCategoryId = table.Column<int>(type: "int", nullable: false),
                     SideEffects = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -109,8 +109,13 @@ namespace VetStat.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CityId = table.Column<int>(type: "int", nullable: false),
-                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CityId = table.Column<int>(type: "int", nullable: true),
+                    ContactNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsInOffice = table.Column<bool>(type: "bit", nullable: false),
+                    IsOnField = table.Column<bool>(type: "bit", nullable: false),
+                    Parking = table.Column<bool>(type: "bit", nullable: false),
+                    Wheelchair = table.Column<bool>(type: "bit", nullable: false),
+                    Wifi = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -119,8 +124,7 @@ namespace VetStat.Migrations
                         name: "FK_VetStation_City_CityId",
                         column: x => x.CityId,
                         principalTable: "City",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -164,11 +168,18 @@ namespace VetStat.Migrations
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CityId = table.Column<int>(type: "int", nullable: true)
+                    CityId = table.Column<int>(type: "int", nullable: true),
+                    ProfileCreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MembershipLoyalty = table.Column<float>(type: "real", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Person", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Person_City_CityId",
+                        column: x => x.CityId,
+                        principalTable: "City",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Person_Role_RoleId",
                         column: x => x.RoleId,
@@ -201,9 +212,11 @@ namespace VetStat.Migrations
                 name: "Inventory",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VetStationId = table.Column<int>(type: "int", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    Quantity = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
                     DateOfEntry = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ProductionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ExpireDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -220,26 +233,59 @@ namespace VetStat.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Inventory_VetStation_Id",
-                        column: x => x.Id,
+                        name: "FK_Inventory_VetStation_VetStationId",
+                        column: x => x.VetStationId,
                         principalTable: "VetStation",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Animal",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OwnerId = table.Column<int>(type: "int", nullable: true),
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AnimalSpeciesId = table.Column<int>(type: "int", nullable: true),
+                    Picture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    MedicalFile = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Animal", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Animal_Person_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Person",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Animal_Species_AnimalSpeciesId",
+                        column: x => x.AnimalSpeciesId,
+                        principalTable: "Species",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Customer",
+                name: "AuthentificationToken",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    ProfileCreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MembershipLoyalty = table.Column<float>(type: "real", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Token = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserProfileId = table.Column<int>(type: "int", nullable: false),
+                    IpAdress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LoggTime = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.Id);
+                    table.PrimaryKey("PK_AuthentificationToken", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Customer_Person_Id",
-                        column: x => x.Id,
+                        name: "FK_AuthentificationToken_Person_UserProfileId",
+                        column: x => x.UserProfileId,
                         principalTable: "Person",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -250,7 +296,7 @@ namespace VetStat.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
-                    VetStationId = table.Column<int>(type: "int", nullable: false),
+                    VetStationId = table.Column<int>(type: "int", nullable: true),
                     DateOfEmployment = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -265,38 +311,7 @@ namespace VetStat.Migrations
                         name: "FK_Employee_VetStation_VetStationId",
                         column: x => x.VetStationId,
                         principalTable: "VetStation",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Animal",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OwnerId = table.Column<int>(type: "int", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AnimalSpeciesId = table.Column<int>(type: "int", nullable: false),
-                    Picture = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
-                    MedicalFile = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Animal", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Animal_Customer_OwnerId",
-                        column: x => x.OwnerId,
-                        principalTable: "Customer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Animal_Species_AnimalSpeciesId",
-                        column: x => x.AnimalSpeciesId,
-                        principalTable: "Species",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -305,7 +320,7 @@ namespace VetStat.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
+                    EmployeeId = table.Column<int>(type: "int", nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AvailableFrom = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AvailableTo = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -318,8 +333,7 @@ namespace VetStat.Migrations
                         name: "FK_Availability_Employee_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employee",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -385,9 +399,9 @@ namespace VetStat.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AvailabilityId = table.Column<int>(type: "int", nullable: false),
+                    AvailabilityId = table.Column<int>(type: "int", nullable: true),
                     SlotDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SlotEmployeeId = table.Column<int>(type: "int", nullable: false),
+                    SlotEmployeeId = table.Column<int>(type: "int", nullable: true),
                     IsAvailable = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -397,25 +411,30 @@ namespace VetStat.Migrations
                         name: "FK_TimeSlot_Availability_AvailabilityId",
                         column: x => x.AvailabilityId,
                         principalTable: "Availability",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TimeSlot_Employee_SlotEmployeeId",
                         column: x => x.SlotEmployeeId,
                         principalTable: "Employee",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "MainVet",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    ChiefVetStationId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_MainVet", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MainVet_VetStation_ChiefVetStationId",
+                        column: x => x.ChiefVetStationId,
+                        principalTable: "VetStation",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_MainVet_Vet_Id",
                         column: x => x.Id,
@@ -430,11 +449,11 @@ namespace VetStat.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    VetStationId = table.Column<int>(type: "int", nullable: false),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    TimeSlotId = table.Column<int>(type: "int", nullable: false),
-                    AnimalId = table.Column<int>(type: "int", nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    VetStationId = table.Column<int>(type: "int", nullable: true),
+                    EmployeeId = table.Column<int>(type: "int", nullable: true),
+                    TimeSlotId = table.Column<int>(type: "int", nullable: true),
+                    AnimalId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -443,32 +462,27 @@ namespace VetStat.Migrations
                         name: "FK_Appointment_Animal_AnimalId",
                         column: x => x.AnimalId,
                         principalTable: "Animal",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Appointment_Customer_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customer",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Appointment_Employee_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employee",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Appointment_Person_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Person",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Appointment_TimeSlot_TimeSlotId",
                         column: x => x.TimeSlotId,
                         principalTable: "TimeSlot",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Appointment_VetStation_VetStationId",
                         column: x => x.VetStationId,
                         principalTable: "VetStation",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -477,9 +491,9 @@ namespace VetStat.Migrations
                 column: "AnimalSpeciesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Animal_OwnerId",
+                name: "IX_Animal_CustomerId",
                 table: "Animal",
-                column: "OwnerId");
+                column: "CustomerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointment_AnimalId",
@@ -507,6 +521,11 @@ namespace VetStat.Migrations
                 column: "VetStationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AuthentificationToken_UserProfileId",
+                table: "AuthentificationToken",
+                column: "UserProfileId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Availability_EmployeeId",
                 table: "Availability",
                 column: "EmployeeId");
@@ -525,6 +544,21 @@ namespace VetStat.Migrations
                 name: "IX_Inventory_ProductId",
                 table: "Inventory",
                 column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Inventory_VetStationId",
+                table: "Inventory",
+                column: "VetStationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MainVet_ChiefVetStationId",
+                table: "MainVet",
+                column: "ChiefVetStationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Person_CityId",
+                table: "Person",
+                column: "CityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Person_RoleId",
@@ -567,6 +601,9 @@ namespace VetStat.Migrations
                 name: "Appointment");
 
             migrationBuilder.DropTable(
+                name: "AuthentificationToken");
+
+            migrationBuilder.DropTable(
                 name: "Barber");
 
             migrationBuilder.DropTable(
@@ -598,9 +635,6 @@ namespace VetStat.Migrations
 
             migrationBuilder.DropTable(
                 name: "Product");
-
-            migrationBuilder.DropTable(
-                name: "Customer");
 
             migrationBuilder.DropTable(
                 name: "Species");

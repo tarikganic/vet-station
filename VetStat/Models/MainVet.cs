@@ -9,7 +9,7 @@ namespace VetStat.Models
     public class MainVet : Vet
     {
         [JsonIgnore]
-        public VetStation ChiefVetStation { get; set; }
+        public VetStation? ChiefVetStation { get; set; }
 
         [ForeignKey("VetStation")]
         public int ChiefVetStationId { get; set; }
