@@ -7,7 +7,7 @@ import {OtherSignUpMethodsComponent} from "../other-sign-up-methods/other-sign-u
 import axios from "axios";
 import {Router, RouterLink} from "@angular/router";
 import {MyAuthService} from "../../services/MyAuth";
-
+import { Config } from '../../config';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -20,7 +20,9 @@ export class LoginComponent implements OnInit{
   constructor(private router:Router,private myAuthService:MyAuthService) {
 
   }
-ngOnInit() {
+ngOnInit() {  
+   if (this.myAuthService.IsLogged())
+      this.router.navigate(['home-page']);
 }
 
   public usernameOrEmail = "";
@@ -40,7 +42,7 @@ isError:boolean = false;
     this.myAuthService.loginValue!.password = this.password
     if (this.emailRegex.test(this.usernameOrEmail) || this.passwordRegex.test(this.password) )
     {
-      let link = "https://localhost:44308/api/LoginAuth/Post";
+      let link = Config.address + "LoginAuth/Post";
 
        axios.post(link, this.myAuthService.loginValue,{headers:{
           'my-auth-token': (this.myAuthService.rememberMe ?

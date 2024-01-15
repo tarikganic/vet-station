@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {Router} from "@angular/router";
 import axios from "axios";
 import {LoginRequest} from "../components/login/LoginRequest";
+import { Config } from "../config";
 @Injectable({providedIn:"root"})
 export class MyAuthService
 {
@@ -29,7 +30,7 @@ LogOut():void
   window.localStorage.removeItem("my-auth-token");
   window.sessionStorage.removeItem("my-auth-token");
 
-  let link = "https://localhost:44308/api/LoginAuth/Delete/"
+  let link = Config.address + "api/LoginAuth/Delete/"
   axios.delete(link+this.token).catch(x=>console.log(x));
 
   this.router.navigate(["/"]);
@@ -38,7 +39,7 @@ LogOut():void
    getAuthorizationToken ()  {
 
 
-    let link = "https://localhost:44308/api/LoginAuth/Post";
+    let link = Config.address + "api/LoginAuth/Post";
 
     axios.post(link, this.loginValue,{headers:{
         'my-auth-token':  this.token
@@ -47,7 +48,6 @@ LogOut():void
       console.log(x.data);
     }).catch(err=>console.log(err.error));
 
-    this.router.navigate(['home-page']);
 
     return (this.rememberMe?window.localStorage.getItem('my-auth-token'):window.sessionStorage.getItem('my-auth-token'))??" ";
   }
