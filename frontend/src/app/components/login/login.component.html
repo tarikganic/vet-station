@@ -1,4 +1,4 @@
-<div class="h-screen m-auto flex" title="container">
+<div class="mt-20 flex" title="container">
 <div class="login-register-box justify-center items-center h-auto m-auto" title="loginBox">
   <div class="flex-container" title="inputSection">
     <h2 class="title">Log in</h2>
@@ -16,7 +16,7 @@
   </div>
   <div class="flex-center-container m-4" title="singInButton">
     <button id="signInButton" (click)="signIn()" routerLink="/home-page">Sign in</button>
-    <h4 class="m-2">Don't have an account?<span class="underline"> Register</span></h4>
+    <h4 class="m-2">Don't have an account?<span class="underline" routerLink="/register"> Register</span></h4>
   </div>
 <footer>
   <app-other-sign-up-methods [isLogin]="true"></app-other-sign-up-methods>

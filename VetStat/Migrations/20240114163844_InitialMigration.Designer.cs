@@ -12,8 +12,8 @@ using VetStat.Data;
 namespace VetStat.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240114005520_update-migration")]
-    partial class updatemigration
+    [Migration("20240114163844_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -306,20 +306,20 @@ namespace VetStat.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<float?>("MembershipLoyalty")
                         .HasColumnType("real");
 
                     b.Property<string>("Password")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Phone")
@@ -335,6 +335,7 @@ namespace VetStat.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Username")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -785,7 +786,7 @@ namespace VetStat.Migrations
             modelBuilder.Entity("VetStat.Models.MainVet", b =>
                 {
                     b.HasOne("VetStat.Models.VetStation", "ChiefVetStation")
-                        .WithMany("MainVets")
+                        .WithMany()
                         .HasForeignKey("ChiefVetStationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -802,11 +803,6 @@ namespace VetStat.Migrations
             modelBuilder.Entity("VetStat.Models.Product", b =>
                 {
                     b.Navigation("SubCategories");
-                });
-
-            modelBuilder.Entity("VetStat.Models.VetStation", b =>
-                {
-                    b.Navigation("MainVets");
                 });
 #pragma warning restore 612, 618
         }

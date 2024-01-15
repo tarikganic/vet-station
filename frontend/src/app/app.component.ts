@@ -5,7 +5,7 @@ import {LoginComponent} from "./components/login/login.component";
 import {NavbarComponent} from "./navbar/navbar.component";
 import {MyAuthService} from "./services/MyAuth";
 import { VetCardComponent } from './components/vet-card/vet-card.component';
-import { RegisterComponent } from "./components/register/register.component";
+import { RegisterComponent } from './components/register/register.component';
 @Component({
     selector: 'app-root',
     standalone: true,
