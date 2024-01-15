@@ -4,7 +4,7 @@ import {ProfileService} from "../../services/ProfileService";
 import {NgForOf, NgIf} from "@angular/common";
 import {FaIconComponent} from "@fortawesome/angular-fontawesome";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
-import {VetCardComponent} from "../vet-card/vet-card.component";
+import {VetCardComponent} from "../../vet-card/vet-card.component";
 import {InputComponent} from "../common/input/input.component";
 import {VetStationList,VetStation} from "./VetStation";
 import axios from "axios";
@@ -12,6 +12,7 @@ import {HttpClient} from "@angular/common/http";
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import {VetStationService} from "../../services/VetStationSearch";
+import { Config } from '../../config';
 @Component({
   selector: 'app-home-page',
   standalone: true,
@@ -65,7 +66,7 @@ this.searchTextChanged.next(children.target.value);
   getAll()
   {
 
-    let url = "https://localhost:44308/api/VetStation/GetAll";
+    let url = Config.address + "api/VetStation/GetAll";
     this.httpClient.get<VetStation[]>(url).subscribe(async x => {
       let vetStationsArr: VetStation[] =  x
       this.vetStationService.vetStations = {vetStations:[...vetStationsArr]}

@@ -4,6 +4,7 @@ import {UserProfile} from "./UserProfile";
 import axios from "axios";
 import {MyAuthService} from "./MyAuth";
 import {VetStationList} from "../components/home-page/VetStation";
+import { Config } from '../config';
 
 
 @Injectable({
@@ -77,7 +78,7 @@ export class VetStationService {
   async setValues(value?:string)
   {
     let arr = this.dropdown;
-    let requestLink = "https://localhost:44308/api/VetStationSearch";
+    let requestLink = Config.address + "api/VetStationSearch";
     let url = requestLink + (value?"?name="+ value:"?");
 
     var counter = 0;

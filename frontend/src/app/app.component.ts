@@ -4,8 +4,8 @@ import {Router, RouterOutlet} from '@angular/router';
 import {LoginComponent} from "./components/login/login.component";
 import {NavbarComponent} from "./navbar/navbar.component";
 import {MyAuthService} from "./services/MyAuth";
-import { VetCardComponent } from './components/vet-card/vet-card.component';
 import { RegisterComponent } from './components/register/register.component';
+import { VetCardComponent } from './vet-card/vet-card.component';
 @Component({
     selector: 'app-root',
     standalone: true,
@@ -21,8 +21,7 @@ export class AppComponent implements  OnInit{
   }
 
   ngOnInit() {
-    if (this.myAuthToken.IsLogged())
-      this.router.navigate(['home-page']);
+ 
 
   }
 

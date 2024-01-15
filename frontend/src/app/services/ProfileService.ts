@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {UserProfile} from "./UserProfile";
 import axios from "axios";
 import {MyAuthService} from "./MyAuth";
+import { Config } from '../config';
 
 
 @Injectable({
@@ -17,7 +18,7 @@ export class ProfileService {
 
  async getUserContent()
   {
-    var link = "https://localhost:44308/api/ProfileEndpoint/GetUserInfo/"
+    var link = Config.address + "api/ProfileEndpoint/GetUserInfo/"
     await axios.get(link + this.myAuthService.token,{headers:{'my-auth-token': this.myAuthService.token}}).then(x=> {
       this.userProfile = x.data
     //  console.log(this.userProfile);

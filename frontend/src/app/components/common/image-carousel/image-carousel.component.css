@@ -1,0 +1,12 @@
+.arrow-shadow
+{
+    filter: drop-shadow(1px 3px 2px black);
+}
+.text-shadow
+{
+    filter: drop-shadow(1px 3px 2px black);
+text-shadow: 10px 10px 25px rgb(81,67,21),
+    0px 10px 25px rgb(81,67,21),
+    0px 0px 25px rgb(81,67,21),
+    10px 0px 25px rgb(81,67,21);
+}
