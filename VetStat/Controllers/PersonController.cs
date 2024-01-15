@@ -43,11 +43,22 @@ namespace VetStat.Controllers
         {
             try
             {
-                Services.PersonValidator(person);
-                _db.Person.Add(person);
-                _db.SaveChanges();
-                return Ok(person);
+                if (_db.Person.ToList<Person>().Where(x => x.Username == person.Username).IsNullOrEmpty())
+                {
+                    if (_db.Person.ToList<Person>().Where(x => x.Email == person.Email).IsNullOrEmpty())
+                    {
+                        if (Services.PersonValidator(person))
+                        {
+                            _db.Person.Add(person);
+                            _db.SaveChanges();
+                        }
+                    }
+                    else throw new Exception("Email already in use");
 
+                }
+                else
+                    throw new Exception("Username already in use");
+                return Ok(person);
                 throw new Exception("Something is wrong! Try again!");
 
             }

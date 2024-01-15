@@ -64,7 +64,7 @@ isError:boolean = false;
      window.alert("Pogresan unos korisnickog imena ili emaila")
     }
   }
-  handleValueChanged($event: string,obj:string) {
+  handleValueChanged($event:string, obj:string) {
     //@ts-ignore
     this[obj] = $event;
   }

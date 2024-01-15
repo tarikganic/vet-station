@@ -18,7 +18,7 @@ namespace VetStat.Helpers.Validators
                         return true;
                     else throw new Exception("Username must be at least 5 characters long!");
                 else throw new Exception("Email format is wrong!");
-            else throw new Exception($"Invalid password: {person.Password}");
+            else throw new Exception($"Password must containt at least: 8 characters, one uppercase letter, one lower case letter, one special character");
         }
 
         public static bool CustomerValidator(Person customer) //todo -> make interfaces for generic method Validator<T>(T obj) where T : IPerson, ICustomer...

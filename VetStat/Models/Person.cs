@@ -9,13 +9,11 @@ namespace VetStat.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
         public string? FirstName { get; set; }
 
-        [Required]
         public string? LastName { get; set; }
-
-        public string? Email { get; set; }
+        [Required]
+        public string Email { get; set; }
 
         public string? Phone { get; set; }
 
@@ -31,10 +29,10 @@ namespace VetStat.Models
         public byte[]? Picture { get; set; } //Pictures are saved as memory stream
 
         public DateTime BirthDate { get; set; } = DateTime.Now;
-
-        public string? Username { get; set; }
-
-        public string? Password { get; set; }
+        [Required]
+        public string Username { get; set; }
+        [Required]
+        public string Password { get; set; }
 
         [ForeignKey("City")]
         public int? CityId { get; set; }
