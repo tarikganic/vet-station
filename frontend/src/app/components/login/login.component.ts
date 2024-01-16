@@ -42,10 +42,10 @@ isError:boolean = false;
     this.myAuthService.loginValue!.password = this.password
     if (this.emailRegex.test(this.usernameOrEmail) || this.passwordRegex.test(this.password) )
     {
-      let link = Config.address + "LoginAuth/Post";
+      let link = Config.address + "api/LoginAuth/Post";
 
        axios.post(link, this.myAuthService.loginValue,{headers:{
-          'my-auth-token': (this.myAuthService.rememberMe ?
+          'my-auth-token': (!this.myAuthService.rememberMe ?
             window.localStorage.getItem('my-auth-token'):window.sessionStorage.getItem('my-auth-token'))
         }}).then(x=> {
         this.myAuthService.rememberMe ?
@@ -53,7 +53,7 @@ isError:boolean = false;
         console.log(x.data);
          this.router.navigate(["home-page"]);
 
-      }).catch(err=>console.log(err.error));
+      }).catch(err=>console.log(err.message));
 
       this.isError = false;
 
